@@ -1,0 +1,80 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #333;
+    color: white;
+}
+
+.create-event {
+    background: #ffcc00;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.mentors {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.mentor-card {
+    width: 200px;
+    text-align: center;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.mentor-img {
+    width: 100px;
+    height: 100px;
+    background: lightgray;
+    border-radius: 50%;
+    margin: auto;
+}
+
+.challenges {
+    padding: 20px;
+}
+
+h2 {
+    border-bottom: 2px solid #333;
+    padding-bottom: 5px;
+}
+
+.challenge-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.challenge {
+    display: flex;
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    width: 48%;
+}
+
+.poster {
+    width: 30%;
+    background: #ccc;
+    text-align: center;
+    padding: 20px;
+}
+
+.details {
+    padding-left: 10px;
+}

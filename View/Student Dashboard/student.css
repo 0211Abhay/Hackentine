@@ -1,0 +1,75 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+}
+
+.top-section {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.event-announcements,
+.leaderboard {
+    width: 47%;
+    height: 130px;
+    background: white;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px black;
+}
+
+.carousel {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background: gray;
+    border-radius: 50%;
+    margin: 5px;
+}
+
+.previous-challenges {
+    padding: 20px;
+}
+
+.challenges-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.challenge {
+    width: 48%;
+    display: flex;
+    background: white;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.poster {
+    width: 30%;
+    background: #ccc;
+    padding: 20px;
+    text-align: center;
+}
+
+.details {
+    padding: 10px;
+}
