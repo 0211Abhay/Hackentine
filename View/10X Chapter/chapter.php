@@ -97,13 +97,13 @@ $result_members = $conn->query($sql_members);
                             <td><?php echo $row['id']; ?></td>
                             <td><?php echo $row['first_name'] . " " . $row['last_name']; ?></td>
                             <td>
-                                <select class="role-dropdown">
+                                <select class="role-dropdown" data-id="<?php echo $row['id']; ?>">
                                     <option value="member" <?php echo ($row['role'] == 'member') ? 'selected' : ''; ?>>Member</option>
                                     <option value="coordinator" <?php echo ($row['role'] == 'coordinator') ? 'selected' : ''; ?>>Coordinator</option>
                                     <option value="mentor" <?php echo ($row['role'] == 'mentor') ? 'selected' : ''; ?>>Mentor</option>
                                 </select>
                             </td>
-                            <td><button class="save-btn">Save</button></td>
+                            <td><button class="save-btn" data-id="<?php echo $row['id']; ?>">Save</button></td>
                         </tr>
                     <?php endwhile; ?>
                 <?php else: ?>
@@ -122,6 +122,23 @@ $result_members = $conn->query($sql_members);
         document.getElementById("show-members").addEventListener("click", function() {
             document.getElementById("event-table").style.display = "none";
             document.getElementById("member-table").style.display = "table";
+        });
+
+        // Update role on Save button click
+        document.querySelectorAll(".save-btn").forEach(button => {
+            button.addEventListener("click", function() {
+                let userId = this.getAttribute("data-id");
+                let selectedRole = document.querySelector(`select[data-id='${userId}']`).value;
+
+                fetch("update_role.php", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    body: `id=${userId}&role=${selectedRole}`
+                })
+                .then(response => response.text())
+                .then(data => alert(data))
+                .catch(error => console.error("Error:", error));
+            });
         });
     </script>
 </body>
