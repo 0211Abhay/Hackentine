@@ -246,12 +246,60 @@ header {
 }
 
 
+/* Statistics Section */
+
+.statistics {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    /* Space between statistics */
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* Space between label and number */
+    font-size: 18px;
+}
+
+.stat-item label {
+    font-weight: 500;
+    color: #EC4904;
+    /* Orange-Red Theme */
+}
+
+.stat-item p {
+    margin: 0;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+}
+
+
+/* Ensuring the TableInput container aligns well */
+
+.TableInput {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1A1A1A;
+    /* Dark Gray */
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 8px rgba(255, 255, 255, 0.1);
+}
+
+
 /* Table */
 
 .TableInput {
     display: flex;
     justify-content: space-between;
 }
+
+
+/* Table Styling */
 
 .event-table {
     width: 100%;
@@ -274,6 +322,37 @@ header {
     background-color: #EC4904;
     /* Orange-Red */
     color: white;
+    text-align: left;
+}
+
+
+/* Role Dropdown */
+
+.role-dropdown {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #EC4904;
+    background: #1A1A1A;
+    color: white;
+    cursor: pointer;
+    outline: none;
+}
+
+
+/* Save Button */
+
+.save-btn {
+    background: #EC4904;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    color: white;
+    transition: 0.3s;
+}
+
+.save-btn:hover {
+    background: #ff5e1f;
 }
 
 
