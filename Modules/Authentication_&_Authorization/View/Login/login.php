@@ -4,7 +4,6 @@ $error = [];
 
 // Include the database connection file
 @include '../../../Includes/db_connect.php';
-@include '../../../../View/Student Dashboard/student.html'
 
 if (isset($_POST['submit'])) {
     try {
