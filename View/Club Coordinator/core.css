@@ -86,11 +86,11 @@ header {
 }
 
 .create-event:hover {
-    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.5);
+    box-shadow: 0 5px 15px #EC4904;
 }
 
 .create-event:hover:before {
-    border-color: #FFFFFF;
+    border-color: #EC4904;
     /* White */
     height: 100%;
     transform: translateX(0);
@@ -98,7 +98,7 @@ header {
 }
 
 .create-event:hover:after {
-    border-color: #FFFFFF;
+    border-color: #EC4904;
     /* White */
     height: 100%;
     transform: translateX(0);

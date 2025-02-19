@@ -4,16 +4,17 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f4f4f4;
+    background-color: #000;
+    color: #fff;
 }
 
 .container {
-    background: white;
+    background: #333;
     padding: 20px;
     border-radius: 15px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
     width: 800px;
-    border: 2px solid black;
+    border: 2px solid white;
 }
 
 .left-right {
@@ -28,7 +29,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid white;
     padding-bottom: 10px;
     margin-bottom: 20px;
 }
@@ -51,8 +52,10 @@ textarea {
     width: 100%;
     padding: 8px;
     margin: 5px 0;
-    border: 1px solid black;
+    border: 1px solid white;
     border-radius: 5px;
+    background: #222;
+    color: #fff;
 }
 
 textarea {
@@ -74,10 +77,53 @@ textarea {
     margin-top: 10px;
 }
 
+.Date {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    width: 73%;
+}
+
+.Date div {
+    display: flex;
+    flex-direction: column;
+    width: 48%;
+}
+
+.Date label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.Date input[type="date"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid white;
+    border-radius: 5px;
+    background: #222;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+}
+
+.Date input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+.Date input[type="date"]:hover {
+    background: #444;
+}
+
 button {
     padding: 10px 15px;
-    border: 1px solid black;
+    border: 1px solid white;
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
+    background: #444;
+    color: #fff;
+}
+
+button:hover {
+    background: #555;
 }
