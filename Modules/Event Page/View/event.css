@@ -1,0 +1,132 @@
+/* General Styles */
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #0D0D0D;
+    /* Dark background */
+    color: white;
+}
+
+
+/* Container */
+
+.container {
+    width: 90%;
+    height: 90vh;
+    background: #1A1A1A;
+    /* Dark Gray */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
+}
+
+
+/* Header */
+
+.header {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #EC4904;
+    /* Orange-Red */
+}
+
+
+/* Event Poster */
+
+.event-poster {
+    width: 100%;
+    height: 250px;
+    background: #333;
+    /* Darker Gray */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+}
+
+
+/* Content */
+
+.content {
+    display: flex;
+    margin-top: 20px;
+}
+
+
+/* Announcement Section */
+
+.announcement {
+    flex: 3;
+    background: #000000;
+    /* Black */
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 5px solid #EC4904;
+    /* Orange-Red Accent */
+}
+
+
+/* Register Box */
+
+.register-box {
+    flex: 1;
+    text-align: center;
+    padding: 20px;
+    background: #1A1A1A;
+    border-radius: 10px;
+}
+
+
+/* Register Button */
+
+.register-box button {
+    padding: 10px 20px;
+    border: none;
+    background: #EC4904;
+    /* Orange-Red */
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.register-box button:hover {
+    background: #ff5e1f;
+    /* Lighter Orange-Red */
+}
+
+
+/* Text Enhancements */
+
+.announcement h3 {
+    color: #EC4904;
+    /* Orange-Red */
+}
+
+.announcement p {
+    line-height: 1.5;
+}
+
+.announcement b {
+    color: #ff5e1f;
+    /* Lighter Orange-Red */
+}
+
+
+/* Deadline Text */
+
+.register-box p {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #EC4904;
+}
