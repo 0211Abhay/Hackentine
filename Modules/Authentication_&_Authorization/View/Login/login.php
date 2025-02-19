@@ -4,6 +4,7 @@ $error = [];
 
 // Include the database connection file
 @include '../../../Includes/db_connect.php';
+@include '../../../../View/Student Dashboard/student.html'
 
 if (isset($_POST['submit'])) {
     try {
@@ -30,19 +31,19 @@ if (isset($_POST['submit'])) {
                 // Set session variables based on user type
                 if ($row['role'] == 'mentor') {
                     $_SESSION['role'] = $row['role'];                 
-                    header('Location: ../../../Mentor_Dasnboard/mentor_dashboard.php');
+                    header('Location: ../../../../View/10X Mentor/mentor.html');
                     exit();
                 } 
                 
                 else if ($row['role'] == 'coordinator') {
                     $_SESSION['role'] = $row['role'] ;                  
-                    header('Location: ../../../Coordinator_Dasnboard/coordinator_dashboard.php');
+                    header('Location: ../../../../View/Club Coordinator/core.html');
                     exit();
                 }
 
                 else if ($row['role'] == 'member') {
                     $_SESSION['role'] = $row['role'];                 
-                    header('Location: ../../../Student_Dashboard/student.php');
+                    header('Location: ../../../../View/Student Dashboard/student.html');
                     exit();
                 }
             } else {
