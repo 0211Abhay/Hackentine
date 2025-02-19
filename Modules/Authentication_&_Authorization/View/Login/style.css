@@ -78,16 +78,23 @@ body {
     height: 100%;
     width: 100%;
     padding: 0 35px;
-    border: none;
+    /* border: none; */
     outline: none;
     font-size: 16px;
-    border-bottom: 2px solid #ccc;
-    border-top: 2px solid transparent;
+    border: 2px solid #ccc;
+    /* border-top: 2px solid transparent; */
     transition: all 0.2s ease;
 }
 .input-field input:is(:focus, :valid) {
-    border-bottom-color: #4070f4;
+    border-color: #4070f4;
 }
+
+.input-field label{
+    font-size: 15px;
+    font-weight: 500;
+    color: #2e2e2e;
+}
+
 .input-field i {
     position: absolute;
     top: 50%;
@@ -95,6 +102,7 @@ body {
     color: #999;
     font-size: 23px;
     transition: all 0.2s ease;
+    padding: 10px;
 }
 .input-field input:is(:focus, :valid)~i {
     color: #4070f4;

@@ -1,5 +1,10 @@
 <?php
 
+session_start();
+
+if(!isset($_SESSION['first_name'])){
+	header('../Authentication_&_Authorization/View/Login.php');
+}
 ?>
 
 <!DOCTYPE html>

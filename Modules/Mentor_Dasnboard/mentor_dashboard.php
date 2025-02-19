@@ -1,5 +1,9 @@
 <?php
+session_start();
 
+if(!isset($_SESSION['first_name'])){
+	header('../Authentication_&_Authorization/View/Login.php');
+}
 ?>
 
 <!DOCTYPE html>
@@ -63,9 +67,9 @@
 				</a>
 			</li>
 			<li>
-				<a href="#" class="logout">
+				<a href="../Authentication_&_Authorization/View/Logout/Logout.php" class="logout">
 					<i class='bx bxs-log-out-circle' ></i>
-					<span class="text">Logout</span>
+					<span class="text" >Logout</span>
 				</a>
 			</li>
 		</ul>
