@@ -1,11 +1,14 @@
 <?php
-
 session_start();
 
-if(!isset($_SESSION['first_name'])){
-	header('../Authentication_&_Authorization/View/Login.php');
+// Correct condition using OR (||) to check if either condition fails
+if (!isset($_SESSION['first_name']) || !isset($_SESSION['role']) || $_SESSION['role'] != "member") {
+    header("Location: ../Authentication_&_Authorization/View/Login.php");
+    exit(); // Stop further execution after redirection
 }
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
