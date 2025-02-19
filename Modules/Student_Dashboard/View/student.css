@@ -1,0 +1,125 @@
+/* General Styles */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #0D0D0D;
+    /* Dark background */
+    color: white;
+}
+
+
+/* Header */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #1A1A1A;
+    /* Dark Gray */
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+/* Top Section */
+
+.top-section {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+
+/* Event Announcements & Leaderboard */
+
+.event-announcements,
+.leaderboard {
+    width: 46%;
+    height: 150px;
+    background: #1A1A1A;
+    /* Dark Gray */
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 5px solid #EC4904;
+    /* Orange-Red Accent */
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+/* Carousel */
+
+.carousel {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    background: #EC4904;
+    /* Orange-Red */
+    border-radius: 50%;
+    margin: 5px;
+}
+
+
+/* Previous Challenges Section */
+
+.previous-challenges {
+    padding: 20px;
+}
+
+.previous-challenges h2 {
+    color: #EC4904;
+    /* Orange-Red */
+}
+
+
+/* Challenges Container */
+
+.challenges-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+
+/* Individual Challenge */
+
+.challenge {
+    width: 48%;
+    display: flex;
+    background: #1A1A1A;
+    /* Dark Gray */
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 10px;
+    border-left: 5px solid #EC4904;
+    /* Orange-Red */
+}
+
+
+/* Event Poster */
+
+.poster {
+    width: 30%;
+    background: #333;
+    /* Darker Gray */
+    padding: 20px;
+    text-align: center;
+    color: white;
+}
+
+
+/* Details */
+
+.details {
+    padding: 10px;
+    font-size: 14px;
+}
