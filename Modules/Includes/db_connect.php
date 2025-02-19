@@ -1,13 +1,13 @@
 <?php
     $host = 'localhost';
-    $dbname = 'hackentine';
+    $dbname = 'event_management';
     $dbusername = 'root';
     $dbpassword = '';
 
     try
     {
-        $pdo = new PDO("mysql:host=$host;dbname=$dbname", $dbusername,$dbpassword);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $conn = new PDO("mysql:host=$host;dbname=$dbname", $dbusername,$dbpassword);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }catch(PDOException $e)
     {
         die("Connection Failed : ". $e->getMessage());

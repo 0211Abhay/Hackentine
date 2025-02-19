@@ -1,53 +1,98 @@
 <?php
 class User {
-    private $pdo;
+    private $conn;
     private $table = "users";
 
-    public function __construct($pdo) {
-        $this->pdo = $pdo;
+    public $id;
+    public $first_name;
+    public $last_name;
+    public $mobile_no;
+    public $email;
+    public $linkedin;
+    public $github;
+    public $password;
+    public $role;
+    public $university_id;
+    public $created_at;
+
+    // Constructor with DB connection
+    public function __construct($db) {
+        $this->conn = $db;
     }
 
-    public function create($name, $email, $password, $role) {
-        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-        $sql = "INSERT INTO {$this->table} (name, email, password, role) VALUES (:name, :email, :password, :role)";
-        $stmt = $this->pdo->prepare($sql);
-        return $stmt->execute(['name' => $name, 'email' => $email, 'password' => $hashedPassword, 'role' => $role]);
+    // Create a new user
+    public function create() {
+        $query = "INSERT INTO " . $this->table . " 
+                  (first_name, last_name, mobile_no, email, linkedin, github, password, role, university_id) 
+                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        $stmt = $this->conn->prepare($query);
+        $hashed_password = password_hash($this->password, PASSWORD_DEFAULT);
+        
+        $stmt->bind_param("ssssssssi", 
+            $this->first_name, $this->last_name, $this->mobile_no, 
+            $this->email, $this->linkedin, $this->github, 
+            $hashed_password, $this->role, $this->university_id
+        );
+
+        if ($stmt->execute()) {
+            return true;
+        }
+        return false;
     }
 
-    public function getAll() {
-        $sql = "SELECT id, name, email, role, created_at FROM {$this->table}";
-        $stmt = $this->pdo->query($sql);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
+    // Get a user by ID
     public function getById($id) {
-        $sql = "SELECT id, name, email, role, created_at FROM {$this->table} WHERE id = :id";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute(['id' => $id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $query = "SELECT * FROM " . $this->table . " WHERE id = ? LIMIT 1";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_assoc();
     }
 
-    public function update($id, $name, $email, $role) {
-        $sql = "UPDATE {$this->table} SET name = :name, email = :email, role = :role WHERE id = :id";
-        $stmt = $this->pdo->prepare($sql);
-        return $stmt->execute(['id' => $id, 'name' => $name, 'email' => $email, 'role' => $role]);
+    // Get all users
+    public function getAll() {
+        $query = "SELECT * FROM " . $this->table;
+        $result = $this->conn->query($query);
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    // Update user information
+    public function update($id) {
+        $query = "UPDATE " . $this->table . " 
+                  SET first_name = ?, last_name = ?, mobile_no = ?, email = ?, linkedin = ?, github = ?, role = ?, university_id = ?
+                  WHERE id = ?";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("sssssssii", 
+            $this->first_name, $this->last_name, $this->mobile_no, 
+            $this->email, $this->linkedin, $this->github, 
+            $this->role, $this->university_id, $id
+        );
+
+        return $stmt->execute();
+    }
+
+    // Delete a user
     public function delete($id) {
-        $sql = "DELETE FROM {$this->table} WHERE id = :id";
-        $stmt = $this->pdo->prepare($sql);
-        return $stmt->execute(['id' => $id]);
+        $query = "DELETE FROM " . $this->table . " WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("i", $id);
+        return $stmt->execute();
     }
 
+    // Authenticate user (Login)
     public function authenticate($email, $password) {
-        $sql = "SELECT id, name, email, password, role FROM {$this->table} WHERE email = :email";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute(['email' => $email]);
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        $query = "SELECT * FROM " . $this->table . " WHERE email = ? LIMIT 1";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $user = $stmt->get_result()->fetch_assoc();
+
         if ($user && password_verify($password, $user['password'])) {
-            unset($user['password']);
             return $user;
         }
         return false;
     }
 }
+?>

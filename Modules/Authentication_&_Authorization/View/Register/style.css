@@ -167,6 +167,11 @@ form .buttons button , .backBtn{
     white-space: nowrap; 
 }
 
+.login-signup a {
+    color: #265df2;
+    text-decoration: none;
+}
+
 
 @media (max-width: 750px) {
     .container form{
