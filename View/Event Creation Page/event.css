@@ -77,6 +77,43 @@ textarea {
     margin-top: 10px;
 }
 
+.Date {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    width: 73%;
+}
+
+.Date div {
+    display: flex;
+    flex-direction: column;
+    width: 48%;
+}
+
+.Date label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.Date input[type="date"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid white;
+    border-radius: 5px;
+    background: #222;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+}
+
+.Date input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+.Date input[type="date"]:hover {
+    background: #444;
+}
+
 button {
     padding: 10px 15px;
     border: 1px solid white;
