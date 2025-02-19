@@ -1,11 +1,12 @@
 <?php
-
 session_start();
 
-if(!isset($_SESSION['first_name'])){
-	header('../Authentication_&_Authorization/View/Login.php');
+if (!isset($_SESSION['first_name']) || !isset($_SESSION['role']) || $_SESSION['role'] != "coordinator") {
+    header("Location: ../Authentication_&_Authorization/View/Login/login.php");
+    exit(); // Always exit after header redirection
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
