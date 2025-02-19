@@ -16,27 +16,29 @@
         </a>
         <div class="user-info">Username</div>
     </header>
+
     <div class="container">
         <div class="event-poster">Event Poster</div>
         <br>
         <div class="TableInput">
             <div>
-                <button class="chapter-btn">10X Chapter</button>
-                <button class="chapter-btn">Events</button>
+                <button class="chapter-btn" id="show-chapters">10X Chapters</button>
+                <button class="chapter-btn" id="show-events">Events</button>
             </div>
             <div class="search-bar">
                 <input type="text" placeholder="Search...">
             </div>
         </div>
         <br>
-        <table class="event-table">
+
+        <!-- 10X Chapters Table -->
+        <table class="event-table" id="chapter-table">
             <thead>
                 <tr>
                     <th>#</th>
                     <th>University Name</th>
                     <th>No Of Members</th>
                     <th>No Of Events</th>
-                    <th>Total Participations</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -46,7 +48,6 @@
                     <td>Marwadi University</td>
                     <td>200</td>
                     <td>10</td>
-                    <td>1500</td>
                     <td><button class="view-details">View Details</button></td>
                 </tr>
                 <tr>
@@ -54,44 +55,41 @@
                     <td>Marwadi University</td>
                     <td>200</td>
                     <td>10</td>
-                    <td>1500</td>
-                    <td><button class="view-details">View Details</button></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Marwadi University</td>
-                    <td>200</td>
-                    <td>10</td>
-                    <td>1500</td>
-                    <td><button class="view-details">View Details</button></td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Marwadi University</td>
-                    <td>200</td>
-                    <td>10</td>
-                    <td>1500</td>
-                    <td><button class="view-details">View Details</button></td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>Marwadi University</td>
-                    <td>200</td>
-                    <td>10</td>
-                    <td>1500</td>
-                    <td><button class="view-details">View Details</button></td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td>Marwadi University</td>
-                    <td>200</td>
-                    <td>10</td>
-                    <td>1500</td>
                     <td><button class="view-details">View Details</button></td>
                 </tr>
             </tbody>
         </table>
+
+        <!-- Events Table (Initially Hidden) -->
+        <table class="event-table" id="event-table" style="display: none;">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Event Name</th>
+                    <th>Event Type</th>
+                    <th>Hosted By</th>
+                    <th>Total Participations</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Tech Conference</td>
+                    <td>Workshop</td>
+                    <td>Marwadi University</td>
+                    <td>150</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>AI Hackathon</td>
+                    <td>Competition</td>
+                    <td>Nirma University</td>
+                    <td>250</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
+
     <script src="../../View/10X Mentor/mentor.js"></script>
 </body>
 
