@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 19, 2025 at 09:17 AM
+-- Generation Time: Feb 19, 2025 at 06:39 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -196,7 +196,8 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `mobile_no`, `email`, `lin
 (1, 'Rahul', 'Sharma', '9876543210', 'rahul.sharma@example.com', 'https://linkedin.com/in/rahulsharma', 'https://github.com/rahulsharma', 'hashed_password_1', 'member', 1, '2025-02-19 05:22:45'),
 (2, 'Ananya', 'Mehta', '9876501234', 'ananya.mehta@example.com', 'https://linkedin.com/in/ananyamehta', 'https://github.com/ananyamehta', 'hashed_password_2', 'coordinator', 2, '2025-02-19 05:22:45'),
 (3, 'Amit', 'Singh', '7890123456', 'amit.singh@example.com', 'https://linkedin.com/in/amitsingh', 'https://github.com/amitsingh', 'hashed_password_3', 'mentor', 1, '2025-02-19 05:22:45'),
-(4, 'Priya', 'Verma', '8901234567', 'priya.verma@example.com', 'https://linkedin.com/in/priyaverma', 'https://github.com/priyaverma', 'hashed_password_4', 'mentor', 3, '2025-02-19 05:22:45');
+(4, 'Priya', 'Verma', '8901234567', 'priya.verma@example.com', 'https://linkedin.com/in/priyaverma', 'https://github.com/priyaverma', 'hashed_password_4', 'mentor', 3, '2025-02-19 05:22:45'),
+(9, 'Abhay', 'Nathwani', '', 'a@g.com', NULL, NULL, '$2y$10$XSZ2OPPdqzVKgXrJoY6jE.vTSM3PfQVbHOTY/Wor4VuwqY/tpbUEq', 'member', 1, '2025-02-19 16:07:49');
 
 --
 -- Indexes for dumped tables
@@ -302,7 +303,7 @@ ALTER TABLE `universities`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
