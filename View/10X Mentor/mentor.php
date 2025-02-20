@@ -8,7 +8,7 @@ if (!isset($_SESSION['first_name']) || !isset($_SESSION['role']) || $_SESSION['r
 
 
 // Database connection
-$servername = "localhost:3307";
+$servername = "localhost:3306";
 $username = "root"; // Change this if necessary
 $password = ""; // Change this if necessary
 $dbname = "event_management"; // Change this to your database name
@@ -70,8 +70,20 @@ $events_result = $conn->query($events_query);
     </div>
     </header>
 
+    <div class="carousel-container">
+            <div class="carousel">
+                <!-- <div class="slider">
+                    <div class="slide-content">
+                        <h1 class="movie-title">loki</h1>
+                        <p class="movie-des">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit saepe eius ratione nostrum mollitia explicabo quae nam pariatur. Sint, odit?</p>
+                    </div>
+                    <img src="images/slider 1.PNG" alt="">
+                </div> -->
+            </div>
+    </div>
     <div class="container">
-        <div class="event-poster">Event Poster</div>
+        <!-- <div class="event-poster">Event Poster</div> -->
+  
         <br>
         <div class="TableInput">
             <div>

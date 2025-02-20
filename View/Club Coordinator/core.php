@@ -4,7 +4,7 @@ require_once '../../../Hackentine/Modules/Includes/db_connect.php';
 
 // Ensure the user is logged in as a coordinator
 if (!isset($_SESSION['first_name']) || !isset($_SESSION['role']) || $_SESSION['role'] != "coordinator") {
-    header("Location: ../Authentication_&_Authorization/View/Login/login.php");
+    header("Location: ../../../Hackentine/Modules/Authentication_&_Authorization/View/Login/login.php");
     exit();
 }
 
