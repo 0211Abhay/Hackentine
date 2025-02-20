@@ -65,9 +65,9 @@ try {
 
     <section class="mentors">
         <div class="mentor-card">
-            <div class="mentor-img">
+            <!-- <div class="mentor-img"> -->
             <img src="../../resources/Pooja Rathore.jpeg"/>
-            </div>
+            <!-- </div> -->
             <div>
             <strong><p class="mentor-name">10x Mentor</p></strong>
             <p>Pooja Rathod</p>
@@ -75,6 +75,8 @@ try {
         </div>
     </section>
 
+    <section class="challenges">
+    <h2>Upcoming Challenges</h2>
     <div class="challenge-list">
     <?php if (!empty($upcomingEvents)): ?>
         <?php foreach ($upcomingEvents as $event): ?>
@@ -97,7 +99,7 @@ try {
         <p>No upcoming events found.</p>
     <?php endif; ?>
 </div>
-
+</section>
 
 <section class="challenges">
     <h2>Previous Challenges</h2>

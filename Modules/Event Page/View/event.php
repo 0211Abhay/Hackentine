@@ -43,7 +43,9 @@ try {
 <body>
     <div class="container">
         <div class="event-poster">
-            <img src="../../resources/event_posters/<?php echo htmlspecialchars($event['poster']); ?>"
+
+
+            <img src="../../Event Creation Page/uploads/<?php echo htmlspecialchars($event['poster']); ?>"
                  onerror="this.onerror=null; this.src='../../resources/event_posters/default.jpg';"
                  alt="Event Poster">
         </div>
