@@ -36,13 +36,13 @@ if (isset($_POST['submit'])) {
                 
                 else if ($row['role'] == 'coordinator') {
                     $_SESSION['role'] = $row['role'] ;                  
-                    header('Location: ../../../Coordinator_Dasnboard/coordinator_dashboard.php');
+                    header('Location: ../../../../../../../Hackentine/View/Club Coordinator/core.php');
                     exit();
                 }
 
                 else if ($row['role'] == 'member') {
                     $_SESSION['role'] = $row['role'];                 
-                    header('Location: ../../../Student_Dashboard/student.php');
+                    header('Location: ../../../../../../../Hackentine/View/Student Dashboard/student.php');
                     exit();
                 }
             } else {
