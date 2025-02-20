@@ -6,6 +6,8 @@ if (!isset($_SESSION['first_name']) || !isset($_SESSION['role']) || $_SESSION['r
     header("Location: ../../../../../Hackentine/Modules/Authentication_&_Authorization/View/Login/login.php");
     exit(); // Stop further execution after redirection
 }
+
+include "../../Modules/Includes/db_connect.php";
 ?>
 
 <html lang="en">
@@ -18,47 +20,76 @@ if (!isset($_SESSION['first_name']) || !isset($_SESSION['role']) || $_SESSION['r
 </head>
 
 <body>
-    <header>
-        <div class="logo">Uni Name</div>
-        <div class="user">Username</div>
-        <div class="logout">
-        <a href="../../Modules/Authentication_&_Authorization/View/Logout/Logout.php" class="logout">
-					<i class='bx bxs-log-out-circle' ></i>
-					<span class="text">Logout</span>
-				</a>
+            <header>
+            <div class="logo"><img src="../../resources/img/10x Mini.png" alt="10X Club Logo"></div>
+            <div class="user-info">
+                <img src="../../Modules/Assets/Images/Admin.jpg" alt="User Image" class="user-image">
+                <?php
 
-        <div class="user">
-            <?php
-        if (isset($_SESSION['first_name']) && !empty($_SESSION['first_name'])) {
-                echo htmlspecialchars($_SESSION['first_name']); 
-            } else {
-                echo "Guest";
-            }
-            ?>
-             <button type="button" onclick="window.location.href='../../Modules/Authentication_&_Authorization/View/Logout/Logout.php'">Logout</button>
-        </div>
-    </header>
+
+                    if (isset($_SESSION['first_name']) && !empty($_SESSION['first_name'])) {
+                        echo htmlspecialchars($_SESSION['first_name']); 
+                    }
+
+                    else {
+                        echo "Guest";
+                    }
+
+                    if (isset($_SESSION['university_id']) && !empty($_SESSION['university_id'])) {
+                        $uni_id = $_SESSION['university_id'];
+                    
+                        // Prepare and execute query using PDO
+                        $stmt = $conn->prepare("SELECT name FROM universities WHERE id = :uni_id");
+                        $stmt->bindValue(':uni_id', $uni_id, PDO::PARAM_INT);
+                        $stmt->execute();
+                        $uni_name = $stmt->fetchColumn();
+                    
+                        // Display university name if found
+                        if ($uni_name) {
+                            echo "<p>" . htmlspecialchars($uni_name) . "</p>";
+                        } else {
+                            echo "<p>University Not Found</p>";
+                        }
+                    }
+
+                    else {
+                        echo "No University Found";
+                    }
+                ?>
+                <button type="button" onclick="window.location.href='../../Modules/Authentication_&_Authorization/View/Logout/Logout.php'" class="logout-btn">Logout</button>
+            </div>
+            
+        </header>
     <main>
-        <section class="top-section">
-            <div class="event-announcements">Event Announcements</div>
-            <div class="leaderboard">Leaderboard</div>
-        </section>
-        <div class="carousel">
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
+        <div class="carousel-container">
+            <div class="carousel">
+                <!-- <div class="slider">
+                    <div class="slide-content">
+                        <h1 class="movie-title">loki</h1>
+                        <p class="movie-des">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit saepe eius ratione nostrum mollitia explicabo quae nam pariatur. Sint, odit?</p>
+                    </div>
+                    <img src="images/slider 1.PNG" alt="">
+                </div> -->
+            </div>
         </div>
+
+        <!-- <div class="carousel">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div> -->
         <section class="previous-challenges">
             <h2>PREVIOUS CHALLENGES</h2>
             <div class="challenges-container">
                 <div class="challenge">
-                    <div class="poster">Event Poster</div>
-                    <div class="details">
-                        <p><strong>Event Name</strong></p>
-                        <p>Date</p>
-                        <p><em>No of Participation</em></p>
-                    </div>
+                        <div class="poster">Event Poster</div>
+                        <div class="details">
+                            <p><strong>Event Name</strong></p>
+                            <p>Date</p>
+                            <p><em>No of Participation</em></p>
+                        </div>
                 </div>
+
                 <div class="challenge">
                     <div class="poster">Event Poster</div>
                     <div class="details">
@@ -67,6 +98,7 @@ if (!isset($_SESSION['first_name']) || !isset($_SESSION['role']) || $_SESSION['r
                         <p><em>No of Participation</em></p>
                     </div>
                 </div>
+
                 <div class="challenge">
                     <div class="poster">Event Poster</div>
                     <div class="details">
@@ -75,6 +107,25 @@ if (!isset($_SESSION['first_name']) || !isset($_SESSION['role']) || $_SESSION['r
                         <p><em>No of Participation</em></p>
                     </div>
                 </div>
+
+                <div class="challenge">
+                    <div class="poster">Event Poster</div>
+                    <div class="details">
+                        <p><strong>Event Name</strong></p>
+                        <p>Date</p>
+                        <p><em>No of Participation</em></p>
+                    </div>
+                </div>
+
+                <div class="challenge">
+                    <div class="poster">Event Poster</div>
+                    <div class="details">
+                        <p><strong>Event Name</strong></p>
+                        <p>Date</p>
+                        <p><em>No of Participation</em></p>
+                    </div>
+                </div>
+
                 <div class="challenge">
                     <div class="poster">Event Poster</div>
                     <div class="details">
