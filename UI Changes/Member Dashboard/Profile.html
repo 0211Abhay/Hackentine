@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <link rel="stylesheet" href="./Profile.css">
+</head>
+<body>
+
+    <div class="profile-container">
+        <img src="./Admin.jpg" alt="Profile Picture" class="profile-picture">
+        <h2 class="profile-name">Narendra Modi</h2>
+
+        <div class="profile-info">
+            <div><strong>First Name:</strong>Narendra</div>
+            <div><strong>Last Name:</strong>Modi</div>
+            <div><strong>Phone:</strong>+91 11111 11111</div>
+            <div><strong>Email:</strong> narendramodi@bjp.in</div>
+            <div><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/narendramodi/" target="_blank">https://www.linkedin.com/in/narendramodi/</a></div>
+            <div><strong>GitHub:</strong> <a href="https://github.com/google" target="_blank">https://github.com/google</a></div>
+            <div><strong>Role:</strong> Mentor</div>
+        </div>
+
+        <div class="profile-buttons">
+            <button onclick="toggleEdit()">Edit Profile</button>
+            <button>Logout</button>
+        </div>
+
+        <div class="edit-form" id="editForm">
+            <h3>Edit Profile</h3>
+            <input type="text" id="name" placeholder="Enter new name">
+            <input type="email" id="email" placeholder="Enter new email">
+            <input type="text" id="phone" placeholder="Enter new phone">
+            <button onclick="saveChanges()">Save</button>
+            <button onclick="toggleEdit()">Cancel</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleEdit() {
+            let editForm = document.getElementById("editForm");
+            editForm.style.display = (editForm.style.display === "block") ? "none" : "block";
+        }
+
+        function saveChanges() {
+            alert("Profile updated successfully!");
+            toggleEdit();
+        }
+    </script>
+
+</body>
+</html>

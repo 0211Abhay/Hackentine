@@ -6,6 +6,6 @@ session_start();
 session_unset();
 session_destroy();
 
-header('Location: ../Login/login.php');
+header('Location: ../../../Authentication_&_Authorization/View/Login/login.php');
 
 ?>

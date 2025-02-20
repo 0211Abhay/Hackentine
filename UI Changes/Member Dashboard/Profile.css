@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #121212;
+    color: #F5F5F5;
+}
+
+/* Profile Container */
+.profile-container {
+    background: #1E1E1E;
+    width: 50%;
+    max-width: 600px;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+}
+
+.profile-container:hover {
+    transform: scale(1.02);
+}
+
+/* Profile Picture */
+.profile-picture {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid #EC4904;
+    margin-bottom: 1rem;
+}
+
+/* Profile Name */
+.profile-name {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #EC4904;
+}
+
+/* Profile Info */
+.profile-info {
+    margin-top: 10px;
+    text-align: left;
+}
+.profile-info a {
+    color: #EC4904;
+    text-decoration: none;
+}
+
+.profile-info div {
+    padding: 10px;
+    font-size: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.profile-info div:last-child {
+    border-bottom: none;
+}
+
+/* Buttons */
+.profile-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+button {
+    background: #EC4904;
+    color: #FFF;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+    background: #FF5C1B;
+    transform: scale(1.05);
+}
+
+/* Edit Form */
+.edit-form {
+    display: none;
+    text-align: left;
+    margin-top: 20px;
+}
+
+.edit-form input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 5px;
+    background: #292929;
+    color: #F5F5F5;
+    border: 1px solid #EC4904;
+}
+
+.edit-form input:focus {
+    border: 1px solid #FF5C1B;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 700px) {
+    .profile-container {
+        width: 90%;
+    }
+
+    .profile-picture {
+        width: 100px;
+        height: 100px;
+    }
+
+    .profile-name {
+        font-size: 1.5rem;
+    }
+
+    button {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+}

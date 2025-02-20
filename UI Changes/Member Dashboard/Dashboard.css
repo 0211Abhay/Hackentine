@@ -1,0 +1,295 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    display: flex;
+    background: #121212; /* Deep dark background for modern look */
+    color: #F5F5F5; /* Light font for readability */
+}
+
+/* Sidebar */
+.sidebar {
+    position: sticky;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 90px;
+    height: 100vh;
+    padding: 0 1.7rem;
+    color: #FFF;
+    overflow: hidden;
+    transition: all 0.5s linear;
+    background: #EC4904; /* Accent color */
+}
+
+.sidebar:hover {
+    width: 300px;
+    transition: 0.5s;
+}
+
+.logo {
+    height: 80px;
+    padding: 16px;
+}
+
+/* Sidebar Menu */
+.menu {
+    height: 88%;
+    position: relative;
+    list-style: none;
+    padding: 0;
+}
+
+.menu li {
+    padding: 1rem;
+    margin: 8px 0;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+}
+
+.menu li:hover,
+.active {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.menu a {
+    color: #FFF;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.menu a i {
+    font-size: 1.3rem;
+}
+
+/* Logout Button */
+.logout {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+/* Main Content */
+.main-container {
+    position: relative;
+    background: #1E1E1E;
+    width: 100%;
+    padding: 1rem;
+}
+
+/* Header */
+.header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    background: #222;
+    border-radius: 10px;
+    padding: 10px 2rem;
+    margin-bottom: 1rem;
+}
+
+.header-title {
+    color: #EC4904;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-box {
+    background: transparent;
+    border-radius: 15px;
+    color: #EC4904;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 12px;
+    margin-right: 25px;
+    border: 2px solid #EC4904;
+}
+
+.search-box input {
+    background: transparent;
+    padding: 8px;
+    color: #FFF;
+}
+
+.search-box i {
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.5s ease-out;
+    color: #EC4904;
+} 
+
+.search-box i:hover {
+    color: #FFF;
+    transform: scale(1.2);
+}
+
+/* Cards */
+.card-container {
+    background: #222;
+    padding: 2rem;
+    border-radius: 10px;
+    height: 215px;
+}
+
+.card-wrapper {
+    display: flex;
+    gap: 1rem;
+}
+
+.payment-card {
+    background: #1E1E1E;
+    border-radius: 10px;
+    padding: 1.2rem;
+    height: 150px;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.5s ease-in-out;
+}
+
+.payment-card:hover {
+    transform: translateY(-5px);
+    background: #292929;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.title {
+    font-size: 12px;
+    font-weight: 300;
+    color: #EC4904;
+}
+
+.amount-value {
+    font-size: 24px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 600;
+    color: #F5F5F5;
+}
+
+/* Stat Circles */
+#Visited, #Attempted, #Programming, #Course {
+    color: #FFF;
+    padding: 1rem;
+    height: 60px;
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+#Visited { background: red; }
+#Attempted { background: purple; }
+#Programming { background: green; }
+#Course { background: blue; }
+
+/* Table */
+.table-wrapper {
+    background: #222;
+    margin-top: 1rem;
+    border-radius: 10px;
+    padding: 2rem;
+}
+
+.table-wrapper h1 {
+    color: #FFF;
+}
+
+.table-container {
+    width: 100%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background: #EC4904;
+    color: #FFF;
+}
+
+th {
+    padding: 15px;
+    text-align: left;
+}
+
+tbody {
+    background: #1E1E1E;
+}
+
+td {
+    padding: 15px;
+    font-size: 14px;
+    color: #FFF;
+}
+
+tr:nth-child(even) {
+    background: #292929;
+}
+
+tfoot {
+    background: #EC4904;
+    font-weight: bold;
+    color: #FFF;
+}
+
+tfoot td {
+    padding: 15px;
+}
+
+/* Responsive Design */
+@media (max-width: 700px) {
+    .sidebar {
+        width: 80px;
+    }
+
+    .menu a {
+        font-size: 12px;
+    }
+
+    .search-box input {
+        padding: 6px;
+    }
+
+    .card-container {
+        overflow-x: auto;
+    }
+
+    .card-detail {
+        font-size: 12px;
+    }
+
+    #Attempted {
+        height: 50px;
+        width: 50px;
+    }
+}
