@@ -9,6 +9,7 @@ if (!isset($_SESSION['first_name']) || !isset($_SESSION['role']) || !$_SESSION['
 $isMentor = ($_SESSION['role'] == "mentor");
 
 
+
 require_once '../Includes/db_connect.php';
 require_once '../Event Creation Page/University.php';
 
@@ -113,7 +114,7 @@ ini_set('display_errors', 1);
 
                     <label>Start Date</label>
                     <input type="datetime-local" name="start_date" required>
-
+                        <br>
                     <label>End Date</label>
                     <input type="datetime-local" name="end_date" required>
                 </div>
