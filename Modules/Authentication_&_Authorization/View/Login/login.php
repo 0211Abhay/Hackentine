@@ -30,6 +30,7 @@ if (isset($_POST['submit'])) {
                 // Set session variables based on user type
                 if ($row['role'] == 'mentor') {
                     $_SESSION['role'] = $row['role'];                 
+
                     header('Location: ../../../../../../Hackentine/View/10X Mentor/mentor.php');
                     exit();
                 } 
@@ -42,6 +43,7 @@ if (isset($_POST['submit'])) {
 
                 else if ($row['role'] == 'member') {
                     $_SESSION['role'] = $row['role'];                 
+
                     header('Location: ../../../../../../../Hackentine/View/Student Dashboard/student.php');
                     exit();
                 }
