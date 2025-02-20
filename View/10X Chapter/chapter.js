@@ -9,12 +9,26 @@ document.getElementById('show-members').addEventListener('click', function() {
 });
 
 // Search functionality
-document.getElementById('searchInput').addEventListener('input', function() {
-    let filter = this.value.toLowerCase();
-    let rows = document.querySelectorAll('tbody tr');
+document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.getElementById("search-input");
 
-    rows.forEach(row => {
-        let text = row.innerText.toLowerCase();
-        row.style.display = text.includes(filter) ? '' : 'none';
+    searchInput.addEventListener("keyup", function () {
+        let filter = searchInput.value.toLowerCase();
+        let activeTable = document.querySelector(".event-table:not([style*='display: none']) tbody");
+
+        if (activeTable) {
+            let rows = activeTable.getElementsByTagName("tr");
+
+            for (let i = 0; i < rows.length; i++) {
+                let cells = rows[i].getElementsByTagName("td");
+                let rowText = "";
+
+                for (let j = 0; j < cells.length; j++) {
+                    rowText += cells[j].textContent.toLowerCase() + " ";
+                }
+
+                rows[i].style.display = rowText.includes(filter) ? "" : "none";
+            }
+        }
     });
 });
