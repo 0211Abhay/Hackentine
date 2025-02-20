@@ -175,7 +175,7 @@ if (isset($_POST['submit'])) {
                     </div>
                     <div class="input-field">
                         <label>Location</label>
-                        <input type="password" name="cpassword" placeholder="Enter Your Location" required>
+                        <input type="text" name="location" placeholder="Enter Your Location" required>
                     </div>
                     <div class="input-field">
                         <label>Portfolio Link</label>
