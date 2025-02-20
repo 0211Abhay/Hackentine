@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+// Correct condition using OR (||) to check if either condition fails
+if (!isset($_SESSION['first_name']) || !isset($_SESSION['role']) || $_SESSION['role'] != "member") {
+    header("Location: ../../../../../Hackentine/Modules/Authentication_&_Authorization/View/Login/login.php");
+    exit(); // Stop further execution after redirection
+}
+?>
+
 <html lang="en">
 
 <head>
@@ -16,6 +26,16 @@
 					<i class='bx bxs-log-out-circle' ></i>
 					<span class="text">Logout</span>
 				</a>
+
+        <div class="user">
+            <?php
+        if (isset($_SESSION['first_name']) && !empty($_SESSION['first_name'])) {
+                echo htmlspecialchars($_SESSION['first_name']); 
+            } else {
+                echo "Guest";
+            }
+            ?>
+             <button type="button" onclick="window.location.href='../../Modules/Authentication_&_Authorization/View/Logout/Logout.php'">Logout</button>
         </div>
     </header>
     <main>

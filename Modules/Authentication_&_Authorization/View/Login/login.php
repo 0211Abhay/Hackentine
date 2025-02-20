@@ -26,17 +26,17 @@ if (isset($_POST['submit'])) {
                 $_SESSION['last_name'] = $row['last_name'];
                 $_SESSION['id'] = $row['id'];
                 $_SESSION['university_id'] = $row['university_id'];     
-
+                $_SESSION['email'] = $row['email'];    
                 // Set session variables based on user type
                 if ($row['role'] == 'mentor') {
                     $_SESSION['role'] = $row['role'];                 
-                    header('Location: ../../../../View/10X Mentor/mentor.html');
+                    header('Location: ../../../../View/10X Mentor/mentor.php');
                     exit();
                 } 
                 
                 else if ($row['role'] == 'coordinator') {
                     $_SESSION['role'] = $row['role'] ;                  
-                    header('Location: ../../../../View/Club Coordinator/core.html');
+                    header('Location: ../../../../View/Club Coordinator/core.php');
                     exit();
                 }
 

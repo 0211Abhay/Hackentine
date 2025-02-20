@@ -1,5 +1,5 @@
 <?php
-    $host = 'localhost';
+    $host = 'localhost:3306';
     $dbname = 'event_management';
     $dbusername = 'root';
     $dbpassword = '';
