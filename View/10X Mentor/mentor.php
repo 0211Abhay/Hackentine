@@ -126,7 +126,21 @@ $events_result = $conn->query($events_query);
         </table>
     </div>
 
-    <script src="../../View/10X Mentor/mentor.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const buttons = document.querySelectorAll(".view-details");
+
+            buttons.forEach(button => {
+                button.addEventListener("click", function () {
+                    const universityId = this.getAttribute("data-university-id");
+                    if (universityId) {
+                        window.location.href = `../../10X Chapter/chapter.php?university_id=${universityId}`;
+                    }
+                });
+            });
+        });
+    </script>
+
 </body>
 
 </html>
