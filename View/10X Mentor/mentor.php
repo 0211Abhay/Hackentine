@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['first_name']) || !isset($_SESSION['role']) || $_SESSION['role'] != "mentor") {
-    header("Location: ../../../../Modules/Authentication_&_Authorization/View/Login/login.php");
+    header("Location: ../../../../../Hackentine/Modules/Authentication_&_Authorization/View/Login/login.php");
     exit(); // Always exit after header redirection
 }
 

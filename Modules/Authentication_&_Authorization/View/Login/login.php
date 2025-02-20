@@ -30,19 +30,21 @@ if (isset($_POST['submit'])) {
                 // Set session variables based on user type
                 if ($row['role'] == 'mentor') {
                     $_SESSION['role'] = $row['role'];                 
-                    header('Location: ../../../../View/10X Mentor/mentor.php');
+
+                    header('Location: ../../../../../../Hackentine/View/10X Mentor/mentor.php');
                     exit();
                 } 
                 
                 else if ($row['role'] == 'coordinator') {
                     $_SESSION['role'] = $row['role'] ;                  
-                    header('Location: ../../../../View/Club Coordinator/core.php');
+                    header('Location: ../../../../../../../Hackentine/View/Club Coordinator/core.php');
                     exit();
                 }
 
                 else if ($row['role'] == 'member') {
                     $_SESSION['role'] = $row['role'];                 
-                    header('Location: ../../../../View/Student Dashboard/student.php');
+
+                    header('Location: ../../../../../../../Hackentine/View/Student Dashboard/student.php');
                     exit();
                 }
             } else {
