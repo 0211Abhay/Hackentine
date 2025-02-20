@@ -1,9 +1,42 @@
 <?php
 session_start();
+require_once '../../../Hackentine/Modules/Includes/db_connect.php';
 
+// Ensure the user is logged in as a coordinator
 if (!isset($_SESSION['first_name']) || !isset($_SESSION['role']) || $_SESSION['role'] != "coordinator") {
     header("Location: ../Authentication_&_Authorization/View/Login/login.php");
-    exit(); // Always exit after header redirection
+    exit();
+}
+
+$university_id = $_SESSION['university_id'];
+
+try {
+    // Fetch Upcoming Events
+    $queryUpcoming = "SELECT id, title, start_date, poster 
+                      FROM events 
+                      WHERE university_id = :university_id 
+                      AND start_date >= CURDATE() 
+                      ORDER BY start_date ASC";
+    
+    $stmtUpcoming = $conn->prepare($queryUpcoming);
+    $stmtUpcoming->bindParam(':university_id', $university_id, PDO::PARAM_INT);
+    $stmtUpcoming->execute();
+    $upcomingEvents = $stmtUpcoming->fetchAll(PDO::FETCH_ASSOC);
+
+    // Fetch Previous Events
+    $queryPrevious = "SELECT id, title, end_date, poster 
+                      FROM events 
+                      WHERE university_id = :university_id 
+                      AND end_date < CURDATE() 
+                      ORDER BY end_date DESC";
+
+    $stmtPrevious = $conn->prepare($queryPrevious);
+    $stmtPrevious->bindParam(':university_id', $university_id, PDO::PARAM_INT);
+    $stmtPrevious->execute();
+    $previousEvents = $stmtPrevious->fetchAll(PDO::FETCH_ASSOC);
+    
+} catch (PDOException $e) {
+    die("Database error: " . $e->getMessage());
 }
 ?>
 
@@ -15,6 +48,7 @@ if (!isset($_SESSION['first_name']) || !isset($_SESSION['role']) || $_SESSION['r
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Core Page</title>
     <link rel="stylesheet" href="../../View/Club Coordinator/core.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 </head>
 
 <body>
@@ -24,76 +58,72 @@ if (!isset($_SESSION['first_name']) || !isset($_SESSION['role']) || $_SESSION['r
             <button class="create-event">Create an Event</button>
         </a>
         <div class="user-info">
-        <?php
-        if (isset($_SESSION['first_name']) && !empty($_SESSION['first_name'])) {
-                echo htmlspecialchars($_SESSION['first_name']); 
-            } else {
-                echo "Guest";
-            }
-            ?>
-             <button type="button" onclick="window.location.href='../../Modules/Authentication_&_Authorization/View/Logout/Logout.php'">Logout</button>
+            <?php echo htmlspecialchars($_SESSION['first_name']); ?>
+            <button class="logout-btn" type="button" onclick="window.location.href='../../Modules/Authentication_&_Authorization/View/Logout/Logout.php'">Logout</button>
         </div>
     </header>
 
     <section class="mentors">
         <div class="mentor-card">
-            <div class="mentor-img"></div>
-            <p class="mentor-name">10x Mentor</p>
+            <div class="mentor-img">
+            <img src="../../resources/Pooja Rathore.jpeg"/>
+            </div>
+            <div>
+            <strong><p class="mentor-name">10x Mentor</p></strong>
             <p>Pooja Rathod</p>
-        </div>
-    </section>
-
-    <section class="challenges">
-        <h2>Upcoming Challenges</h2>
-        <div class="challenge-list">
-            <div class="challenge">
-                <div class="poster">Event Poster</div>
-                <div class="details">
-                    <p><strong>Event Name</strong></p>
-                    <p>Date</p>
-                    <p>No of Participation</p>
-                </div>
-            </div>
-            <div class="challenge">
-                <div class="poster">Event Poster</div>
-                <div class="details">
-                    <p><strong>Event Name</strong></p>
-                    <p>Date</p>
-                    <p>No of Participation</p>
-                </div>
             </div>
         </div>
     </section>
 
-    <section class="challenges">
-        <h2>Previous Challenges</h2>
-        <div class="challenge-list">
-            <div class="challenge">
-                <div class="poster">Event Poster</div>
-                <div class="details">
-                    <p><strong>Event Name</strong></p>
-                    <p>Date</p>
-                    <p>No of Participation</p>
+    <div class="challenge-list">
+    <?php if (!empty($upcomingEvents)): ?>
+        <?php foreach ($upcomingEvents as $event): ?>
+            <a href="../../../Hackentine/Modules/Event Page/View/event.php?id=<?php echo $event['id']; ?>" class="challenge-link">
+                <div class="challenge">
+                    <div class="poster">
+                        <img src="../../resources/event_posters/<?php echo htmlspecialchars($event['poster']); ?>"
+                             onerror="this.onerror=null; this.src='../../resources/event_posters/default.jpg';"
+                             alt="Event Poster">
+                    </div>
+                    <div class="details">
+                        <p><strong><?php echo htmlspecialchars($event['title']); ?></strong></p>
+                        <p><?php echo htmlspecialchars(date('d M Y', strtotime($event['start_date']))); ?></p>
+                        <p>Participants: TBD</p>
+                    </div>
                 </div>
-            </div>
-            <div class="challenge">
-                <div class="poster">Event Poster</div>
-                <div class="details">
-                    <p><strong>Event Name</strong></p>
-                    <p>Date</p>
-                    <p>No of Participation</p>
-                </div>
-            </div>
-            <div class="challenge">
-                <div class="poster">Event Poster</div>
-                <div class="details">
-                    <p><strong>Event Name</strong></p>
-                    <p>Date</p>
-                    <p>No of Participation</p>
-                </div>
-            </div>
-        </div>
-    </section>
+            </a>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <p>No upcoming events found.</p>
+    <?php endif; ?>
+</div>
+
+
+<section class="challenges">
+    <h2>Previous Challenges</h2>
+    <div class="challenge-list">
+        <?php if (!empty($previousEvents)): ?>
+            <?php foreach ($previousEvents as $event): ?>
+                <a href="../../../Hackentine/Modules/Event Page/View/event.php?id=<?php echo $event['id']; ?>" class="challenge-link">
+                    <div class="challenge">
+                        <div class="poster">
+                            <img src="../../resources/event_posters/<?php echo htmlspecialchars($event['poster']); ?>"
+                                 onerror="this.onerror=null; this.src='../../resources/event_posters/default.jpg';"
+                                 alt="Event Poster">
+                        </div>
+                        <div class="details">
+                            <p><strong><?php echo htmlspecialchars($event['title']); ?></strong></p>
+                            <p><?php echo htmlspecialchars(date('d M Y', strtotime($event['end_date']))); ?></p>
+                            <p>Participants: TBD</p>
+                        </div>
+                    </div>
+                </a>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>No previous events found.</p>
+        <?php endif; ?>
+    </div>
+</section>
 
     <script src="../../View/Club Coordinator/core.js"></script>
 </body>

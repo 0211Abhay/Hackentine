@@ -105,6 +105,21 @@ header {
     transition: .3s transform linear, .3s height linear .5s;
 }
 
+.logout-btn {
+    background: #EC4904;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+    color: white;
+    font-weight: bold;
+    transition: 0.3s ease-in-out;
+    padding: 10px;
+}
+
+.logout-btn:hover {
+    background: #ff5e1f;
+}
+
 
 /* Mentor Section */
 
@@ -125,12 +140,39 @@ header {
     box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.2);
 }
 
+.mentor-card {
+    width: 200px;
+    text-align: center;
+    background: #1A1A1A;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Centers the content horizontally */
+}
+
 .mentor-img {
     width: 100px;
     height: 100px;
-    background: gray;
     border-radius: 50%;
-    margin: auto;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: gray;
+}
+
+.mentor-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.mentor-name {
+    font-size: large;
 }
 
 
