@@ -1,6 +1,6 @@
 <?php
 // Database connection
-$servername = "localhost:3307";
+$servername = "localhost:3306";
 $username = "root"; // Change this if necessary
 $password = ""; // Change this if necessary
 $dbname = "event_management"; // Change this to your database name
@@ -81,7 +81,10 @@ $events_result = $conn->query($events_query);
                         echo "<td>" . htmlspecialchars($row["name"]) . "</td>";
                         echo "<td>" . $row["total_members"] . "</td>";
                         echo "<td>" . $row["total_events"] . "</td>";
-                        echo "<td><a href='chapter.php?university_id=" . $row["id"] . "'><button class='view-details'>View Details</button></a></td>";
+                        echo "<td><a href='../10X Chapter/chapter.php?uni_id=" . $row["id"] . "'>
+                                <button class='view-details'>View Details</button>
+                            </a></td>";
+
                         echo "</tr>";
                     }
                 } else {

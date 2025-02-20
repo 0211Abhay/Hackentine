@@ -1,5 +1,5 @@
 <?php
-$servername = "localhost:3307";
+$servername = "localhost:3306";
 $username = "root";
 $password = "";
 $database = "event_management";
@@ -21,6 +21,7 @@ $result_events = $conn->query($sql_events);
 // Fetch members data
 $sql_members = "SELECT id, first_name, last_name, role FROM users";
 $result_members = $conn->query($sql_members);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,7 +37,20 @@ $result_members = $conn->query($sql_members);
         <a href="../Event Creation Page/event.html">
             <button class="create-event">Create an Event</button>
         </a>
+
         <div class="user-info">Username</div>
+        <div>
+        <?php
+            if (isset($_GET['uni_id'])) {
+                $uni_id = $_GET['uni_id'];
+                echo "<p style='color:white;'>Received ID: " . htmlspecialchars($uni_id) . "</p>";
+            }
+
+            else {
+                echo "<p style='color:white;'>No ID received.</p>";
+            }
+        ?>
+        </div>
     </header>
     <div class="container">
         <div class="event-poster">Event Poster</div>
