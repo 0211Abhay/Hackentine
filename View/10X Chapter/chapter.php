@@ -36,18 +36,19 @@ $result_members = $conn->query($sql_members);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>10X Mentor Page</title>
+    <title>10X Chapter Page</title>
     <link rel="stylesheet" href="../../View/10X Chapter/chapter.css">
 </head>
 <body>
     <header>
         <div class="logo"><img src="../../resources/img/10x Mini.png" alt="10X Club Logo"></div>
-        <a href="../Event Creation Page/event.html">
-            <button class="create-event">Create an Event</button>
-        </a>
-
+            <div>
+                <a href="../Event Creation Page/event.html">
+                <button class="create-event">Create an Event</button>
+                </a>
+            </div>
         <div class="user-info">Username</div>
-        <div>
+        <!-- <div>
             <?php
             if ($uni_id > 0) {
                 // echo "<p style='color:white;'>University ID: " . htmlspecialchars($uni_id) . "</p>";
@@ -55,7 +56,7 @@ $result_members = $conn->query($sql_members);
                 // echo "<p style='color:white;'>No University Selected</p>";
             }
             ?>
-        </div>
+        </div> -->
     </header>
 
     <div class="container">
