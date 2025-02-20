@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['first_name']) || !isset($_SESSION['role']) || $_SESSION['role'] != "mentor") {
+    header("Location: ../../../../Modules/Authentication_&_Authorization/View/Login/login.php");
+    exit(); // Always exit after header redirection
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,10 +20,17 @@
 <body>
     <header>
         <div class="logo"><img src="../../resources/img/10x Mini.png" alt="10X Club Logo"></div>
-        <a href="../Event Creation Page/event.html">
+        <a href="../../../Hackentine/Modules/Event Creation Page/event.php">
             <button class="create-event">Create an Event</button>
         </a>
-        <div class="user-info">Username</div>
+        <div class="user-info"><?php
+        if (isset($_SESSION['first_name']) && !empty($_SESSION['first_name'])) {
+                echo htmlspecialchars($_SESSION['first_name']); 
+            } else {
+                echo "Guest";
+            }
+            ?>
+             <button type="button" onclick="window.location.href='../../Modules/Authentication_&_Authorization/View/Logout/Logout.php'">Logout</button></div>
     </header>
     <div class="container">
         <div class="event-poster">Event Poster</div>
