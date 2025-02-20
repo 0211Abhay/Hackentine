@@ -71,8 +71,19 @@ $result_members = $conn->query($sql_members);
         </div> -->
     </header>
 
+    <div class="carousel-container">
+            <div class="carousel">
+                <!-- <div class="slider">
+                    <div class="slide-content">
+                        <h1 class="movie-title">loki</h1>
+                        <p class="movie-des">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit saepe eius ratione nostrum mollitia explicabo quae nam pariatur. Sint, odit?</p>
+                    </div>
+                    <img src="images/slider 1.PNG" alt="">
+                </div> -->
+            </div>
+    </div>
+
     <div class="container">
-        <div class="event-poster">Event Poster</div>
         <br>
         <div class="TableInput">
             <div class="statistics">
@@ -149,59 +160,7 @@ $result_members = $conn->query($sql_members);
             </tbody>
         </table>
     </div>
-
-    <script>
-        document.getElementById("show-events").addEventListener("click", function() {
-            document.getElementById("event-table").style.display = "table";
-            document.getElementById("member-table").style.display = "none";
-        });
-
-        document.getElementById("show-members").addEventListener("click", function() {
-            document.getElementById("event-table").style.display = "none";
-            document.getElementById("member-table").style.display = "table";
-        });
-
-        // Update role on Save button click
-        document.querySelectorAll(".save-btn").forEach(button => {
-            button.addEventListener("click", function() {
-                let userId = this.getAttribute("data-id");
-                let selectedRole = document.querySelector(`select[data-id='${userId}']`).value;
-
-                fetch("update_role.php", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                    body: `id=${userId}&role=${selectedRole}`
-                })
-                .then(response => response.text())
-                .then(data => alert(data))
-                .catch(error => console.error("Error:", error));
-            });
-        });
-
-        document.addEventListener("DOMContentLoaded", function () {
-            const searchInput = document.getElementById("search-input");
-
-            searchInput.addEventListener("keyup", function () {
-                let filter = searchInput.value.toLowerCase();
-                let activeTable = document.querySelector(".event-table:not([style*='display: none']) tbody");
-
-                if (activeTable) {
-                    let rows = activeTable.getElementsByTagName("tr");
-
-                    for (let i = 0; i < rows.length; i++) {
-                        let cells = rows[i].getElementsByTagName("td");
-                        let rowText = "";
-
-                        for (let j = 0; j < cells.length; j++) {
-                            rowText += cells[j].textContent.toLowerCase() + " ";
-                        }
-
-                        rows[i].style.display = rowText.includes(filter) ? "" : "none";
-                    }
-                }
-            });
-        });
-    </script>
+    <script src="../../View/10X Chapter/chapter.js"></script>
 </body>
 </html>
 <?php $conn->close(); ?>
