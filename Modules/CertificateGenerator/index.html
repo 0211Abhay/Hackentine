@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Certificates</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+            flex-direction: column;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        input {
+            padding: 10px;
+            width: 200px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Generate Certificates</h2>
+        <input type="number" id="event_id" placeholder="Enter Event ID">
+        <br>
+        <button onclick="generateCertificates()">Generate & Send</button>
+        <p id="response"></p>
+    </div>
+
+    <script>
+        function generateCertificates() {
+            const eventId = document.getElementById("event_id").value;
+            if (!eventId) {
+                alert("Please enter a valid Event ID.");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append("event_id", eventId);
+
+            fetch("generate_certificate.php", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("response").innerText = data;
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                document.getElementById("response").innerText = "Error occurred while generating certificates.";
+            });
+        }
+    </script>
+
+</body>
+</html>
