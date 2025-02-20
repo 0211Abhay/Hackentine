@@ -30,7 +30,7 @@ if (isset($_POST['submit'])) {
                 // Set session variables based on user type
                 if ($row['role'] == 'mentor') {
                     $_SESSION['role'] = $row['role'];                 
-                    header('Location: ../../../10X Mentor/View/mentor.html');
+                    header('Location: ../../../../../../Hackentine/View/10X Mentor/mentor.php');
                     exit();
                 } 
                 
