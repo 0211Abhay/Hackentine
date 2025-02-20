@@ -38,11 +38,8 @@ if (!isset($_SESSION['first_name']) || !isset($_SESSION['role']) || $_SESSION['r
     <section class="mentors">
         <div class="mentor-card">
             <div class="mentor-img"></div>
-            <p class="mentor-name">University Mentor</p>
-        </div>
-        <div class="mentor-card">
-            <div class="mentor-img"></div>
             <p class="mentor-name">10x Mentor</p>
+            <p>Pooja Rathod</p>
         </div>
     </section>
 
