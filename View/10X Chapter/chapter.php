@@ -47,7 +47,19 @@ $result_members = $conn->query($sql_members);
                 <button class="create-event">Create an Event</button>
                 </a>
             </div>
-        <div class="user-info">Username</div>
+            <div class="user-info">
+            <img src="../../Modules/Assets/Images/Admin.jpg" alt="User Image" class="user-image">
+            <?php
+                if (isset($_SESSION['first_name']) && !empty($_SESSION['first_name'])) {
+                    echo htmlspecialchars($_SESSION['first_name']); 
+                }
+
+                else {
+                    echo "Guest";
+                }
+            ?>
+        <button type="button" onclick="window.location.href='../../Modules/Authentication_&_Authorization/View/Logout/Logout.php'" class="logout-btn">Logout</button>
+        </div>
         <!-- <div>
             <?php
             if ($uni_id > 0) {
@@ -68,7 +80,7 @@ $result_members = $conn->query($sql_members);
                 <button class="toggle-btn" id="show-members">10X Members</button>
             </div>
             <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="Search...">
+                <input type="text" id="search-input" placeholder="Search...">
             </div>
         </div>
         <br>
@@ -85,10 +97,13 @@ $result_members = $conn->query($sql_members);
                 </tr>
             </thead>
             <tbody>
-                <?php if ($result_events->num_rows > 0): ?>
+                <?php if ($result_events->num_rows > 0): 
+                    $counter = 1;
+                    ?>
+                    
                     <?php while ($row = $result_events->fetch_assoc()): ?>
                         <tr>
-                            <td><?php echo $row['id']; ?></td>
+                            <td><?php echo $counter++; ?></td>
                             <td><?php echo htmlspecialchars($row['title']); ?></td>
                             <td><?php echo $row['total_participation']; ?></td>
                             <td><?php echo $row['start_date']; ?></td>
@@ -112,10 +127,11 @@ $result_members = $conn->query($sql_members);
                 </tr>
             </thead>
             <tbody>
-                <?php if ($result_members->num_rows > 0): ?>
+                <?php if ($result_members->num_rows > 0): 
+                    $counter = 1;?>
                     <?php while ($row = $result_members->fetch_assoc()): ?>
                         <tr>
-                            <td><?php echo $row['id']; ?></td>
+                            <td><?php echo $counter++; ?></td>
                             <td><?php echo htmlspecialchars($row['first_name'] . " " . $row['last_name']); ?></td>
                             <td>
                                 <select class="role-dropdown" data-id="<?php echo $row['id']; ?>">
@@ -159,6 +175,30 @@ $result_members = $conn->query($sql_members);
                 .then(response => response.text())
                 .then(data => alert(data))
                 .catch(error => console.error("Error:", error));
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const searchInput = document.getElementById("search-input");
+
+            searchInput.addEventListener("keyup", function () {
+                let filter = searchInput.value.toLowerCase();
+                let activeTable = document.querySelector(".event-table:not([style*='display: none']) tbody");
+
+                if (activeTable) {
+                    let rows = activeTable.getElementsByTagName("tr");
+
+                    for (let i = 0; i < rows.length; i++) {
+                        let cells = rows[i].getElementsByTagName("td");
+                        let rowText = "";
+
+                        for (let j = 0; j < cells.length; j++) {
+                            rowText += cells[j].textContent.toLowerCase() + " ";
+                        }
+
+                        rows[i].style.display = rowText.includes(filter) ? "" : "none";
+                    }
+                }
             });
         });
     </script>

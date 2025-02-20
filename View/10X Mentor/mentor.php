@@ -46,6 +46,7 @@ $events_result = $conn->query($events_query);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>10X Mentor Page</title>
     <link rel="stylesheet" href="../../View/10X Mentor/mentor.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"/>
 </head>
 
 <body>
@@ -54,14 +55,19 @@ $events_result = $conn->query($events_query);
         <a href="../../../Hackentine/Modules/Event Creation Page/event.php">
             <button class="create-event">Create an Event</button>
         </a>
-        <div class="user-info"><?php
-        if (isset($_SESSION['first_name']) && !empty($_SESSION['first_name'])) {
-                echo htmlspecialchars($_SESSION['first_name']); 
-            } else {
-                echo "Guest";
-            }
+        <div class="user-info">
+            <img src="../../Modules/Assets/Images/Admin.jpg" alt="User Image" class="user-image">
+            <?php
+                if (isset($_SESSION['first_name']) && !empty($_SESSION['first_name'])) {
+                    echo htmlspecialchars($_SESSION['first_name']); 
+                }
+
+                else {
+                    echo "Guest";
+                }
             ?>
-             <button type="button" onclick="window.location.href='../../Modules/Authentication_&_Authorization/View/Logout/Logout.php'">Logout</button></div>
+        <button type="button" onclick="window.location.href='../../Modules/Authentication_&_Authorization/View/Logout/Logout.php'" class="logout-btn">Logout</button>
+    </div>
     </header>
 
     <div class="container">
@@ -73,7 +79,7 @@ $events_result = $conn->query($events_query);
                 <button class="chapter-btn" id="show-events">Events</button>
             </div>
             <div class="search-bar">
-                <input type="text" placeholder="Search...">
+                <input type="text" id="search-input" placeholder="Search...">
             </div>
         </div>
         <br>
