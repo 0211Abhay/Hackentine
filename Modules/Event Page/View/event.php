@@ -52,13 +52,13 @@ try {
                 <h3>Announcement</h3>
                 <p>&rarr; <?php echo htmlspecialchars($event['description']); ?></p>
                 <p>&rarr; <b>Timelines</b>: <?php echo htmlspecialchars(date('d M Y', strtotime($event['start_date']))); ?> - <?php echo htmlspecialchars(date('d M Y', strtotime($event['end_date']))); ?></p>
-                <p>&rarr; <b>Eligibility</b>: <?php echo htmlspecialchars($event['eligibility']); ?></p>
+                <p>&rarr; <b>Eligibility</b>: Every Under Graduate student will eligible</p>
                 <p>&rarr; <b>Rules</b>: <?php echo htmlspecialchars($event['rules']); ?></p>
                 <p>&rarr; <b>Rewards</b>: <?php echo htmlspecialchars($event['rewards']); ?></p>
             </div>
             <div class="register-box">
                 <button>Register</button>
-                <p>Deadline: <?php echo htmlspecialchars(date('d M Y', strtotime($event['registration_deadline']))); ?></p>
+                <p>Deadline: <?php echo htmlspecialchars(date('d M Y', strtotime($event['end_date']))); ?></p>
             </div>
         </div>
     </div>
