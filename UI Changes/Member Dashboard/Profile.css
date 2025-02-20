@@ -60,6 +60,11 @@ body {
     text-decoration: none;
 }
 
+.profile-info strong {
+    font-weight: 600;
+    margin-right: 10px;
+}
+
 .profile-info div {
     padding: 10px;
     font-size: 1rem;
