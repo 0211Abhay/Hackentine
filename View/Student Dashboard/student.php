@@ -20,6 +20,13 @@ if (!isset($_SESSION['first_name']) || !isset($_SESSION['role']) || $_SESSION['r
 <body>
     <header>
         <div class="logo">Uni Name</div>
+        <div class="user">Username</div>
+        <div class="logout">
+        <a href="../../Modules/Authentication_&_Authorization/View/Logout/Logout.php" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+
         <div class="user">
             <?php
         if (isset($_SESSION['first_name']) && !empty($_SESSION['first_name'])) {

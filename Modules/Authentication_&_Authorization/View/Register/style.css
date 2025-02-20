@@ -11,7 +11,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #4070f4;
+    background: #333;
 }
 
 .container {
@@ -40,15 +40,18 @@ body {
     height: 3px;
     width: 27px;
     border-radius: 8px;
-    background-color: #4070f4;
+    background-color: #EC4904;
 }
 
 .container form {
     position: relative;
     margin-top: 16px;
-    min-height: 450px;
     background-color: #fff;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: auto;
 }
 
 .container form .form {
@@ -63,10 +66,8 @@ body {
     transform: translateX(100%);
 }
 
-form.secActive .form.second {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateX(0);
+form {
+    height: 500px !important;
 }
 
 form.secActive .form.first {
@@ -100,7 +101,7 @@ form .fields .input-field {
 
 .input-field label {
     font-size: 12px;
-    font-weight: 500;
+    font-weight: 650;
     color: #2e2e2e;
 }
 
@@ -115,6 +116,10 @@ select {
     padding: 0 15px;
     height: 42px;
     margin: 8px 0;
+}
+
+select {
+    background-color: #fff;
 }
 
 .input-field input :focus,
@@ -148,7 +153,7 @@ select {
     color: #fff;
     border-radius: 5px;
     margin: 25px 0;
-    background-color: #4070f4;
+    background-color: #EC4904;
     transition: all 0.3s linear;
     cursor: pointer;
 }
@@ -158,8 +163,9 @@ select {
     font-weight: 400;
 }
 
-form button:hover {
-    background-color: #265df2;
+form button:hover{
+    background-color: #EC4904;
+
 }
 
 form button i,
@@ -195,7 +201,7 @@ form .buttons button,
 }
 
 .login-signup a {
-    color: #265df2;
+    color: #EC4904;
     text-decoration: none;
 }
 

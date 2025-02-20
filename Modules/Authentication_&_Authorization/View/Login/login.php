@@ -87,7 +87,7 @@ if (isset($_POST['submit'])) {
                         <i class="uil uil-envelope icon"></i>
                     </div>
                     <div class="input-field">
-                        <input type="password" name="password" placeholder="Enter your password" required />
+                        <input type="password" name="password" class="password" placeholder="Enter your password" required />
                         <i class="uil uil-lock icon"></i>
                         <i class="uil uil-eye-slash showHidePw"></i>
                     </div>
@@ -111,6 +111,6 @@ if (isset($_POST['submit'])) {
             </div>
         </div>
     </div>
-    <script src="script.js"></script>
+    <script src="./script.js"></script>
 </body>
 </html>
