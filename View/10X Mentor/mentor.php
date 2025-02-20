@@ -50,25 +50,25 @@ $events_result = $conn->query($events_query);
 </head>
 
 <body>
-    <header>
-        <div class="logo"><img src="../../resources/img/10x Mini.png" alt="10X Club Logo"></div>
-        <a href="../../../Hackentine/Modules/Event Creation Page/event.php">
-            <button class="create-event">Create an Event</button>
-        </a>
-        <div class="user-info">
-            <img src="../../Modules/Assets/Images/Admin.jpg" alt="User Image" class="user-image">
-            <?php
-                if (isset($_SESSION['first_name']) && !empty($_SESSION['first_name'])) {
-                    echo htmlspecialchars($_SESSION['first_name']); 
-                }
+        <header>
+            <div class="logo"><img src="../../resources/img/10x Mini.png" alt="10X Club Logo"></div>
+            <a href="../../../Hackentine/Modules/Event Creation Page/event.php">
+                <button class="create-event">Create an Event</button>
+            </a>
+            <div class="user-info">
+                <img src="../../Modules/Assets/Images/Admin.jpg" alt="User Image" class="user-image">
+                <?php
+                    if (isset($_SESSION['first_name']) && !empty($_SESSION['first_name'])) {
+                        echo htmlspecialchars($_SESSION['first_name']); 
+                    }
 
-                else {
-                    echo "Guest";
-                }
-            ?>
-        <button type="button" onclick="window.location.href='../../Modules/Authentication_&_Authorization/View/Logout/Logout.php'" class="logout-btn">Logout</button>
-    </div>
-    </header>
+                    else {
+                        echo "Guest";
+                    }
+                ?>
+                <button type="button" onclick="window.location.href='../../Modules/Authentication_&_Authorization/View/Logout/Logout.php'" class="logout-btn">Logout</button>
+            </div>
+        </header>
 
     <div class="carousel-container">
             <div class="carousel">
