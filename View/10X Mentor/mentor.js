@@ -1,9 +1,9 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const viewDetailsButtons = document.querySelectorAll('.view-details');
+document.getElementById("show-chapters").addEventListener("click", function() {
+    document.getElementById("chapter-table").style.display = "table";
+    document.getElementById("event-table").style.display = "none";
+});
 
-    viewDetailsButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            alert('Details for the event will be shown here.');
-        });
-    });
+document.getElementById("show-events").addEventListener("click", function() {
+    document.getElementById("chapter-table").style.display = "none";
+    document.getElementById("event-table").style.display = "table";
 });

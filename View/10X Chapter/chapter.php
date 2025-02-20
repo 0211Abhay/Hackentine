@@ -1,5 +1,5 @@
 <?php
-$servername = "localhost:3307";
+$servername = "localhost:3306";
 $username = "root";
 $password = "";
 $database = "event_management";
@@ -12,16 +12,25 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Fetch events data
-$sql_events = "SELECT e.id, e.title, e.start_date, e.end_date, COALESCE(es.total_registrations, 0) as total_participation
-        FROM events e
-        LEFT JOIN event_statistics es ON e.id = es.event_id";
+// Get university ID from GET request
+$uni_id = isset($_GET['uni_id']) ? intval($_GET['uni_id']) : 0;
+
+// Fetch events related to the university
+$sql_events = "
+    SELECT e.id, e.title, e.start_date, e.end_date, 
+           COALESCE(es.total_registrations, 0) AS total_participation
+    FROM events e
+    LEFT JOIN event_statistics es ON e.id = es.event_id
+    WHERE e.university_id = $uni_id"; // Filter by university_id
+
 $result_events = $conn->query($sql_events);
 
-// Fetch members data
-$sql_members = "SELECT id, first_name, last_name, role FROM users";
+// Fetch members related to the university
+$sql_members = "SELECT id, first_name, last_name, role FROM users WHERE university_id = $uni_id"; // Filter by university_id
+
 $result_members = $conn->query($sql_members);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,8 +45,19 @@ $result_members = $conn->query($sql_members);
         <a href="../Event Creation Page/event.html">
             <button class="create-event">Create an Event</button>
         </a>
+
         <div class="user-info">Username</div>
+        <div>
+            <?php
+            if ($uni_id > 0) {
+                // echo "<p style='color:white;'>University ID: " . htmlspecialchars($uni_id) . "</p>";
+            } else {
+                // echo "<p style='color:white;'>No University Selected</p>";
+            }
+            ?>
+        </div>
     </header>
+
     <div class="container">
         <div class="event-poster">Event Poster</div>
         <br>
@@ -68,14 +88,14 @@ $result_members = $conn->query($sql_members);
                     <?php while ($row = $result_events->fetch_assoc()): ?>
                         <tr>
                             <td><?php echo $row['id']; ?></td>
-                            <td><?php echo $row['title']; ?></td>
+                            <td><?php echo htmlspecialchars($row['title']); ?></td>
                             <td><?php echo $row['total_participation']; ?></td>
                             <td><?php echo $row['start_date']; ?></td>
                             <td><?php echo $row['end_date']; ?></td>
                         </tr>
                     <?php endwhile; ?>
                 <?php else: ?>
-                    <tr><td colspan="5">No events found</td></tr>
+                    <tr><td colspan="5">No events found for this university</td></tr>
                 <?php endif; ?>
             </tbody>
         </table>
@@ -95,7 +115,7 @@ $result_members = $conn->query($sql_members);
                     <?php while ($row = $result_members->fetch_assoc()): ?>
                         <tr>
                             <td><?php echo $row['id']; ?></td>
-                            <td><?php echo $row['first_name'] . " " . $row['last_name']; ?></td>
+                            <td><?php echo htmlspecialchars($row['first_name'] . " " . $row['last_name']); ?></td>
                             <td>
                                 <select class="role-dropdown" data-id="<?php echo $row['id']; ?>">
                                     <option value="member" <?php echo ($row['role'] == 'member') ? 'selected' : ''; ?>>Member</option>
@@ -107,7 +127,7 @@ $result_members = $conn->query($sql_members);
                         </tr>
                     <?php endwhile; ?>
                 <?php else: ?>
-                    <tr><td colspan="4">No members found</td></tr>
+                    <tr><td colspan="4">No members found for this university</td></tr>
                 <?php endif; ?>
             </tbody>
         </table>
