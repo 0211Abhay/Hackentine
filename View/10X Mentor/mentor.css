@@ -368,3 +368,75 @@ header {
 .view-details:hover {
     background: #ff5e1f;
 }
+
+
+/* Add University Form */
+
+#add-university-form {
+    display: none;
+    background: #1A1A1A;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 8px rgba(255, 255, 255, 0.1);
+    color: white;
+    text-align: center;
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+
+/* Form Heading */
+
+#add-university-form h3 {
+    color: #EC4904;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+
+/* Input Field */
+
+#add-university-form input[type="text"] {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 2px solid #EC4904;
+    border-radius: 5px;
+    background: #0D0D0D;
+    color: white;
+    font-size: 16px;
+    outline: none;
+}
+
+
+/* Submit Button */
+
+#add-university-form button {
+    background: #EC4904;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: 0.3s ease-in-out;
+    width: 30%;
+}
+
+
+/* Hover Effect */
+
+#add-university-form button:hover {
+    background: #ff5e1f;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(236, 73, 4, 0.4);
+}
+
+
+/* Button Click Effect */
+
+#add-university-form button:active {
+    transform: scale(0.95);
+}
