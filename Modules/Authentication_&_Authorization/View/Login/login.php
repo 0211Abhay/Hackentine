@@ -7,51 +7,65 @@ $error = [];
 
 if (isset($_POST['submit'])) {
     try {
-        // Sanitize and validate inputs
-        $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-        $password = $_POST['password'];
+        // Sanitize inputs
+        $email = trim($_POST['email']);
+        $password = trim($_POST['password']);
 
-        // Prepare the SQL query to fetch user data
-        $select = "SELECT * FROM users WHERE email = :email";
-        $stmt = $conn->prepare($select);
-        $stmt->bindParam(':email', $email);
-        $stmt->execute();
+        // Input Validations
+        if (empty($email)) {
+            $error[] = "Email is required.";
+        } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $error[] = "Invalid email format.";
+        }
 
-        if ($stmt->rowCount() > 0) {
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (empty($password)) {
+            $error[] = "Password is required.";
+        } elseif (strlen($password) < 6) {
+            $error[] = "Password must be at least 6 characters long.";
+        }
 
-            // Verify the password
-            if (password_verify($password, $row['password'])) {
-                $_SESSION['first_name'] = $row['first_name'];
-                $_SESSION['last_name'] = $row['last_name'];
-                $_SESSION['id'] = $row['id'];
-                $_SESSION['university_id'] = $row['university_id'];     
-                $_SESSION['email'] = $row['email'];    
-                // Set session variables based on user type
-                if ($row['role'] == 'mentor') {
-                    $_SESSION['role'] = $row['role'];                 
+        // Proceed only if there are no errors
+        if (empty($error)) {
+            // Prepare the SQL query to fetch user data
+            $select = "SELECT * FROM users WHERE email = :email";
+            $stmt = $conn->prepare($select);
+            $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+            $stmt->execute();
 
-                    header('Location: ../../../../../../Hackentine/View/10X Mentor/mentor.php');
+            if ($stmt->rowCount() > 0) {
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                // Verify the password
+                if (password_verify($password, $row['password'])) {
+                    $_SESSION['first_name'] = $row['first_name'];
+                    $_SESSION['last_name'] = $row['last_name'];
+                    $_SESSION['id'] = $row['id'];
+                    $_SESSION['university_id'] = $row['university_id'];     
+                    $_SESSION['email'] = $row['email'];    
+                    
+                    // Set session variables based on user type
+                    $_SESSION['role'] = $row['role']; 
+
+                    switch ($row['role']) {
+                        case 'mentor':
+                            header('Location: ../../../../../../Hackentine/View/10X Mentor/mentor.php');
+                            break;
+                        case 'coordinator':
+                            header('Location: ../../../../../../../Hackentine/Modules/Club Coordinator/View/core.php');
+                            break;
+                        case 'member':
+                            header('Location: ../../../../../../../Hackentine/View/Student Dashboard/student.php');
+                            break;
+                        default:
+                            $error[] = "Invalid user role.";
+                    }
                     exit();
-                } 
-                
-                else if ($row['role'] == 'coordinator') {
-                    $_SESSION['role'] = $row['role'] ;                  
-                    header('Location: ../../../../../../../Hackentine/Modules/Club Coordinator/View/core.php');
-                    exit();
-                }
-
-                else if ($row['role'] == 'member') {
-                    $_SESSION['role'] = $row['role'];                 
-
-                    header('Location: ../../../../../../../Hackentine/View/Student Dashboard/student.php');
-                    exit();
+                } else {
+                    $error[] = 'Incorrect email or password!';
                 }
             } else {
                 $error[] = 'Incorrect email or password!';
             }
-        } else {
-            $error[] = 'Incorrect email or password!';
         }
     } catch (PDOException $e) {
         $error[] = 'Database error: ' . $e->getMessage();
@@ -85,7 +99,7 @@ if (isset($_POST['submit'])) {
                 ?>
                 <form action="" method="post">
                     <div class="input-field">
-                        <input type="text" name="email" placeholder="Enter your email" required />
+                        <input type="text" name="email" placeholder="Enter your email" value="<?php echo htmlspecialchars($_POST['email'] ?? ''); ?>" required />
                         <i class="uil uil-envelope icon"></i>
                     </div>
                     <div class="input-field">
