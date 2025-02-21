@@ -86,9 +86,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit_university"])) 
 <body>
         <header>
             <div class="logo"><img src="../../resources/img/10x Mini.png" alt="10X Club Logo"></div>
+            <div>
             <a href="../../../Hackentine/Modules/Event Creation Page/event.php">
                 <button class="create-event">Create an Event</button>
             </a>
+            <a href="../../../Hackentine/View/Event Notification/notification.php   ">
+                <button class="create-event">Approve an Event</button>
+            </a>
+            </div>
             <div class="user-info">
                 <img src="../../Modules/Assets/Images/Admin.jpg" alt="User Image" class="user-image">
                 <?php
