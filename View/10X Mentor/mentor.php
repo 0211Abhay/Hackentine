@@ -8,7 +8,7 @@ if (!isset($_SESSION['first_name']) || !isset($_SESSION['role']) || $_SESSION['r
 
 
 // Database connection
-$servername = "localhost:3306";
+$servername = "localhost:3307";
 $username = "root"; // Change this if necessary
 $password = ""; // Change this if necessary
 $dbname = "event_management"; // Change this to your database name

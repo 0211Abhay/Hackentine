@@ -13,7 +13,11 @@ if ($conn->connect_error) {
 }
 
 // Fetch Pending Events
-$sql = "SELECT id, title, event_type, university_id, created_by FROM events WHERE status = 'pending'";
+$sql = "SELECT events.id, events.title, events.event_type, events.created_by, 
+               universities.name AS university_name 
+        FROM events 
+        LEFT JOIN universities ON events.university_id = universities.id
+        WHERE events.status = 'pending'";
 $result = $conn->query($sql);
 
 $pendingEvents = [];
@@ -52,12 +56,14 @@ $conn->close();
                     <div class="event-card">
                         <div class="event-info">
                             <p><strong><?php echo htmlspecialchars($event['title']); ?></strong></p>
-                            <p>University: <?php echo htmlspecialchars($event['university_id']); ?></p>
+                            <p>University: <?php echo htmlspecialchars($event['university_name'] ?? 'N/A'); ?></p>
                             <p>Created By: <?php echo htmlspecialchars($event['created_by']); ?></p>
                             <p>Event Type: <?php echo htmlspecialchars($event['event_type']); ?></p>
                         </div>
                         <div class="event-actions">
-                            <a href="edit_event.php?id=<?php echo $event['id']; ?>"><button class="edit-btn">Edit</button></a>
+                            <a href="../../../Hackentine/Modules/Event Page/View/event.php?id=<?php echo $event['id']; ?>">
+                                <button class="view-btn">View</button>
+                            </a>
                             <button class="approve-btn" onclick="updateStatus(<?php echo $event['id']; ?>, 'approved')">Approve</button>
                             <button class="reject-btn" onclick="updateStatus(<?php echo $event['id']; ?>, 'rejected')">Reject</button>
                         </div>
