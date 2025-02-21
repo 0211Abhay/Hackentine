@@ -18,6 +18,24 @@ require_once '../Event Creation Page/University.php';
 // Fetch all universities
 $universities = getAllUniversities();
 
+
+
+
+
+// Function to get university name by ID
+function getUniversityName($university_id, $conn) {
+    $query = "SELECT name FROM universities WHERE id = :id";
+    $stmt = $conn->prepare($query);
+    $stmt->bindValue(':id', $university_id, PDO::PARAM_INT); // Bind using PDO
+    $stmt->execute();
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $row ? htmlspecialchars($row['name']) : "Unknown University";
+}
+
+
+
+
+
 // For debugging
 error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
 ini_set('display_errors', 1);
@@ -39,7 +57,18 @@ ini_set('display_errors', 1);
         <div class="header">
             <div class="logo">
                 <img src="../../resources/img/10X Logo.jpg" alt="Logo">
-                <span>Uni Name</span>
+                <span><?php
+                $universityName = "";
+                if ($_SESSION["role"] == "coordinator" && isset($_SESSION["university_id"])) {
+                    $universityName = getUniversityName($_SESSION["university_id"], $conn);
+                }
+                if($_SESSION["role"] == "mentor"){
+                    echo "Welcome";
+                }
+                else if($_SESSION["role"] == "coordinator"){
+                    echo $universityName;
+                }
+                ?></span>
             </div>
             <span>
             <?php
