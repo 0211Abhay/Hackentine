@@ -37,7 +37,7 @@ if (isset($_POST['submit'])) {
                 
                 else if ($row['role'] == 'coordinator') {
                     $_SESSION['role'] = $row['role'] ;                  
-                    header('Location: ../../../../../../../Hackentine/View/Club Coordinator/core.php');
+                    header('Location: ../../../../../../../Hackentine/Modules/Club Coordinator/View/core.php');
                     exit();
                 }
 
