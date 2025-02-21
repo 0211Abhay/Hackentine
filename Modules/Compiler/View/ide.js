@@ -22,7 +22,7 @@ function executeCode() {
 
     $.ajax({
 
-        url: "http://10.80.9.223/Hackentine/Modules/Compiler/Services/compiler.php",
+        url: "http://192.168.0.161/Hackentine/Modules/Compiler/Services/compiler.php",
 
         method: "POST",
 
