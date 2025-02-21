@@ -108,20 +108,22 @@ ini_set('display_errors', 1);
                     <label><input type="radio" name="event_type" value="Hackathon"> Hackathon</label>
                     <label><input type="radio" name="event_type" value="Coding Challenge"> Coding Challenge</label>
                     <label><input type="radio" name="event_type" value="Other" id="otherType"> Other</label>
-                    <input type="text" id="customTypeInput" placeholder="Custom Type" style="display:none;">
+                    <input type="text" id="customTypeInput" placeholder="Enter custom event type" style="display: none;">
 
 
                     <?php if ($isMentor): ?>
                         <div class="event-access">
-    <label>Access Type</label>
-    <label>
-        <input type="radio" name="access_type" value="university-specific" checked onclick="toggleUniversityDropdown()"> 
-        University-Specific
-    </label>
-    <label>
-        <input type="radio" name="access_type" value="open-for-all" onclick="toggleUniversityDropdown()"> 
-        Open-for-All
-    </label>
+                    <label>Access Type</label>
+                    <br>
+                    <label>
+                        <input type="radio" name="access_type" value="university-specific" checked onclick="toggleUniversityDropdown()"> 
+                        University-Specific
+                    </label>
+                    <br>
+                    <label>
+                        <input type="radio" name="access_type" value="open-for-all" onclick="toggleUniversityDropdown()"> 
+                        Open-for-All
+                    </label>
 
     <!-- University Dropdown -->
     <div id="universityDropdown" style="display: block;">
@@ -154,6 +156,7 @@ ini_set('display_errors', 1);
         </form>
     </div>
 
+    <script src="event.js"></script>
 </body>
 
 </html>

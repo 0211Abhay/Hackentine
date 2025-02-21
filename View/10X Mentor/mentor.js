@@ -1,5 +1,4 @@
-let movies = [
-    {
+let movies = [{
         name: 'How does this even work?" Well, it’s time to find out—and build one yourself!',
         des: 'In collaboration with WnCC IIT Bombay, we’re hosting a hands-on workshop where you’ll not only learn but also create your own chatbot in real time.',
         image: 'images/1.jpg'
@@ -23,7 +22,7 @@ let movies = [
         name: 'how AI actually understands language & Why RAG is the backbone of modern AI apps .',
         des: 'AI is getting smarter every day, and tools like Perplexity AI are proof of that! But how do they find the right answers so fast? The secret is Retrieval-Augmented Generation (RAG).',
         image: 'images/5.jpg'
-    } ,
+    },
     {
         name: 'Anatomy of a Chatbot 2.0',
         des: '- Discover how chatbots are designed and built , Create a chatbot that can have smooth conversations , Learn how chatbots remember past conversations , No experience needed! Our workshop is interactive, easy to follow, and perfect for beginners.',
@@ -47,7 +46,7 @@ let sliders = [];
 let slideIndex = 0; // to track current slide index.
 
 const createSlide = () => {
-    if(slideIndex >= movies.length){
+    if (slideIndex >= movies.length) {
         slideIndex = 0;
     }
 
@@ -58,18 +57,18 @@ const createSlide = () => {
     let h1 = document.createElement('h1');
     let p = document.createElement('p');
 
-    
-        // attaching all elements
-        imgElement.appendChild(document.createTextNode(''));
-        h1.appendChild(document.createTextNode(movies[slideIndex].name));
-        p.appendChild(document.createTextNode(movies[slideIndex].des));
-        content.appendChild(h1);
-        content.appendChild(p);
-        slide.appendChild(content);
-        slide.appendChild(imgElement);
-        carousel.appendChild(slide);
-    
-        // setting up image
+
+    // attaching all elements
+    imgElement.appendChild(document.createTextNode(''));
+    h1.appendChild(document.createTextNode(movies[slideIndex].name));
+    p.appendChild(document.createTextNode(movies[slideIndex].des));
+    content.appendChild(h1);
+    content.appendChild(p);
+    slide.appendChild(content);
+    slide.appendChild(imgElement);
+    carousel.appendChild(slide);
+
+    // setting up image
     imgElement.src = movies[slideIndex].image;
     slideIndex++;
 
@@ -81,11 +80,11 @@ const createSlide = () => {
 
     sliders.push(slide);
 
-    if(sliders.length){
+    if (sliders.length) {
         sliders[0].style.marginLeft = `calc(-${100 * (sliders.length - 2)}% - ${30 * (sliders.length - 2)}px)`;
     }
 }
-for(let i = 0; i < 3; i++){
+for (let i = 0; i < 3; i++) {
     createSlide();
 }
 
@@ -104,10 +103,10 @@ document.getElementById("show-events").addEventListener("click", function() {
     document.getElementById("event-table").style.display = "table";
 });
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function() {
     const searchInput = document.getElementById("search-input");
 
-    searchInput.addEventListener("keyup", function () {
+    searchInput.addEventListener("keyup", function() {
         let filter = searchInput.value.toLowerCase();
         let activeTable = document.querySelector(".event-table:not([style*='display: none']) tbody");
 
@@ -125,5 +124,32 @@ document.addEventListener("DOMContentLoaded", function () {
                 rows[i].style.display = rowText.includes(filter) ? "" : "none";
             }
         }
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    const showChaptersBtn = document.getElementById("show-chapters");
+    const showEventsBtn = document.getElementById("show-events");
+    const addUniversityBtn = document.getElementById("add-university");
+    const chapterTable = document.getElementById("chapter-table");
+    const eventTable = document.getElementById("event-table");
+    const addUniversityForm = document.getElementById("add-university-form");
+
+    showChaptersBtn.addEventListener("click", function() {
+        chapterTable.style.display = "table";
+        eventTable.style.display = "none";
+        addUniversityForm.style.display = "none";
+    });
+
+    showEventsBtn.addEventListener("click", function() {
+        chapterTable.style.display = "none";
+        eventTable.style.display = "table";
+        addUniversityForm.style.display = "none";
+    });
+
+    addUniversityBtn.addEventListener("click", function() {
+        chapterTable.style.display = "none";
+        eventTable.style.display = "none";
+        addUniversityForm.style.display = "block";
     });
 });

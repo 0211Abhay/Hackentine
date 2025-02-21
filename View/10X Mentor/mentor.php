@@ -36,6 +36,40 @@ $events_query = "
     LEFT JOIN universities u ON e.university_id = u.id 
     GROUP BY e.id";
 $events_result = $conn->query($events_query);
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit_university"])) {
+    $university_name = trim($_POST["university_name"]);
+
+    if (!empty($university_name)) {
+        // Check if university already exists
+        $check_stmt = $conn->prepare("SELECT id FROM universities WHERE name = ?");
+        $check_stmt->bind_param("s", $university_name);
+        $check_stmt->execute();
+        $check_stmt->store_result();
+
+        if ($check_stmt->num_rows > 0) {
+            echo "<script>alert('University already exists!');</script>";
+        } else {
+            // Insert only if it doesn't exist
+            $stmt = $conn->prepare("INSERT INTO universities (name) VALUES (?)");
+            $stmt->bind_param("s", $university_name);
+
+            if ($stmt->execute()) {
+                echo "<script>alert('University added successfully!'); window.location.href = window.location.href;</script>";
+            } else {
+                echo "<script>alert('Error adding university. Try again.');</script>";
+            }
+
+            $stmt->close();
+        }
+
+        $check_stmt->close();
+    } else {
+        echo "<script>alert('University name cannot be empty.');</script>";
+    }
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -89,74 +123,86 @@ $events_result = $conn->query($events_query);
             <div>
                 <button class="chapter-btn" id="show-chapters">10X Chapters</button>
                 <button class="chapter-btn" id="show-events">Events</button>
+                <button class="chapter-btn" id="add-university">Add University</button>
             </div>
             <div class="search-bar">
                 <input type="text" id="search-input" placeholder="Search...">
             </div>
         </div>
         <br>
+<!-- 10X Chapters Table -->
+<table class="event-table" id="chapter-table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>University Name</th>
+            <th>No Of Members</th>
+            <th>No Of Events</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        $counter = 1; // Initialize counter for numbering
+        if ($chapters_result->num_rows > 0) {
+            while ($row = $chapters_result->fetch_assoc()) {
+                echo "<tr>";
+                echo "<td>" . $counter++ . "</td>"; // Print incremented counter
+                echo "<td>" . htmlspecialchars($row["name"]) . "</td>";
+                echo "<td>" . $row["total_members"] . "</td>";
+                echo "<td>" . $row["total_events"] . "</td>";
+                echo "<td><a href='../10X Chapter/chapter.php?uni_id=" . $row["id"] . "'>
+                        <button class='view-details'>View Details</button>
+                    </a></td>";
+                echo "</tr>";
+            }
+        } else {
+            echo "<tr><td colspan='5'>No universities found</td></tr>";
+        }
+        ?>
+    </tbody>
+</table>
 
-        <!-- 10X Chapters Table -->
-        <table class="event-table" id="chapter-table">
-            <thead>
-                <tr>
-                    <th>University Name</th>
-                    <th>No Of Members</th>
-                    <th>No Of Events</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                if ($chapters_result->num_rows > 0) {
-                    while ($row = $chapters_result->fetch_assoc()) {
-                        echo "<tr>";
-                        echo "<td>" . htmlspecialchars($row["name"]) . "</td>";
-                        echo "<td>" . $row["total_members"] . "</td>";
-                        echo "<td>" . $row["total_events"] . "</td>";
-                        echo "<td><a href='../10X Chapter/chapter.php?uni_id=" . $row["id"] . "'>
-                                <button class='view-details'>View Details</button>
-                            </a></td>";
+<!-- Events Table (Initially Hidden) -->
+<table class="event-table" id="event-table" style="display: none;">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Event Name</th>
+            <th>Event Type</th>
+            <th>Hosted By</th>
+            <th>Total Participations</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        $counter = 1; // Reset counter for events table
+        if ($events_result->num_rows > 0) {
+            while ($row = $events_result->fetch_assoc()) {
+                echo "<tr>";
+                echo "<td>" . $counter++ . "</td>"; // Print incremented counter
+                echo "<td>" . htmlspecialchars($row["title"]) . "</td>";
+                echo "<td>" . htmlspecialchars($row["event_type"]) . "</td>";
+                echo "<td>" . htmlspecialchars($row["university_name"]) . "</td>";
+                echo "<td>" . htmlspecialchars($row["total_participations"]) . "</td>";
+                echo "</tr>";
+            }
+        } else {
+            echo "<tr><td colspan='5'>No events found</td></tr>";
+        }
+        ?>
+    </tbody>
+</table>
+<!-- Add University Form (Hidden by Default) -->
+<div id="add-university-form" style="display: none;">
+    <h3>Add a New University</h3>
+    <form action="" method="POST">
+        <label>University Name:</label>
+        <input type="text" name="university_name" required>
+        <button type="submit" name="submit_university">Submit</button>
+    </form>
+</div>
 
-                        echo "</tr>";
-                    }
-                } else {
-                    echo "<tr><td colspan='4'>No universities found</td></tr>";
-                }
-                ?>
-            </tbody>
-        </table>
-
-        <!-- Events Table (Initially Hidden) -->
-        <table class="event-table" id="event-table" style="display: none;">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Event Name</th>
-                    <th>Event Type</th>
-                    <th>Hosted By</th>
-                    <th>Total Participations</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                if ($events_result->num_rows > 0) {
-                    $counter = 1;
-                    while ($row = $events_result->fetch_assoc()) {
-                        echo "<tr>";
-                        echo "<td>" . $counter++ . "</td>";
-                        echo "<td>" . htmlspecialchars($row["title"]) . "</td>";
-                        echo "<td>" . htmlspecialchars($row["event_type"]) . "</td>";
-                        echo "<td>" . htmlspecialchars($row["university_name"]) . "</td>";
-                        echo "<td>" . htmlspecialchars($row["total_participations"]) . "</td>";
-                        echo "</tr>";
-                    }
-                } else {
-                    echo "<tr><td colspan='5'>No events found</td></tr>";
-                }
-                ?>
-            </tbody>
-        </table>
     </div>
 
     <script src="../../View/10X Mentor/mentor.js"></script>
