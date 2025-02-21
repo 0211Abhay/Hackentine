@@ -110,7 +110,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $stmt->execute();
         echo "Event " . ($event_id ? "updated" : "created") . " successfully!";
-        header("Location: ../../../Hackentine/View/Club Coordinator/core.php");
+        if($user_role == "mentor"){
+            header("Location: ../../../../../Hackentine/View/10X Mentor/mentor.php");
+        }
+        else if($user_role == "coordinator")
+        {
+            header("Location: ../../../Hackentine/View/Club Coordinator/core.php");
+        }
     } catch (Exception $e) {
         die("Error: " . $e->getMessage());
     }
