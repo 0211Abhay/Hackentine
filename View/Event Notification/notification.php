@@ -1,6 +1,6 @@
 <?php
 // Database Connection
-$servername = "localhost:3307";
+$servername = "localhost:3306";
 $username = "root";
 $password = "";
 $database = "event_management";
@@ -42,10 +42,21 @@ $conn->close();
 <body>
     <header>
         <div class="logo"><img src="../../resources/img/10x Mini.png" alt="10X Club Logo"></div>
-        <a href="../Event Creation Page/event.html">
+        <a href="../../../Hackentine/Modules/Event Creation Page/event.php">
             <button class="create-event">Create an Event</button>
         </a>
-        <div class="user-info">Username</div>
+        <?php
+
+            session_start();
+            if (isset($_SESSION['first_name']) && !empty($_SESSION['first_name'])) {
+                echo htmlspecialchars($_SESSION['first_name']); 
+            }
+
+            else {
+                echo "Guest";
+            }
+        
+        ?>
     </header>
 
     <div class="container">

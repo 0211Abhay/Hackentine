@@ -72,22 +72,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($event_id) {
             // **UPDATE EXISTING EVENT**
             $stmt = $conn->prepare("UPDATE events SET 
-                title = ?, description = ?, event_type = ?, university_id = ?, start_date = ?, end_date = ?, 
-                timeline_description = ?, rules = ?, rewards = ?, poster = ?
-                WHERE id = ?");
-            $stmt->bind_param("sssissssssi", $title, $description, $event_type, $university_id, $start_date, $end_date, 
-                             $timeline_description, $rules, $rewards, $poster, $event_id);
+            title = :title, description = :description, event_type = :event_type, university_id = :university_id, 
+            start_date = :start_date, end_date = :end_date, timeline_description = :timeline_description, 
+            rules = :rules, rewards = :rewards, poster = :poster WHERE id = :id");
+        
+        $stmt->bindParam(":title", $title, PDO::PARAM_STR);
+        $stmt->bindParam(":description", $description, PDO::PARAM_STR);
+        $stmt->bindParam(":event_type", $event_type, PDO::PARAM_STR);
+        $stmt->bindParam(":university_id", $university_id, PDO::PARAM_INT);
+        $stmt->bindParam(":start_date", $start_date, PDO::PARAM_STR);
+        $stmt->bindParam(":end_date", $end_date, PDO::PARAM_STR);
+        $stmt->bindParam(":timeline_description", $timeline_description, PDO::PARAM_STR);
+        $stmt->bindParam(":rules", $rules, PDO::PARAM_STR);
+        $stmt->bindParam(":rewards", $rewards, PDO::PARAM_STR);
+        $stmt->bindParam(":poster", $poster, PDO::PARAM_STR);
+        $stmt->bindParam(":id", $event_id, PDO::PARAM_INT);
+        
         } else {
             // **CREATE NEW EVENT**
             $stmt = $conn->prepare("INSERT INTO events 
-                (title, description, event_type, university_id, created_by, status, start_date, end_date, timeline_description, rules, rewards, poster)
-                VALUES (?, ?, ?, ?, ?, 'pending', ?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("sssisssssss", $title, $description, $event_type, $university_id, $created_by, $start_date, 
-                             $end_date, $timeline_description, $rules, $rewards, $poster);
+            (title, description, event_type, university_id, created_by, status, start_date, end_date, timeline_description, rules, rewards, poster) 
+            VALUES (:title, :description, :event_type, :university_id, :created_by, 'pending', :start_date, :end_date, :timeline_description, :rules, :rewards, :poster)");
+        
+        $stmt->bindParam(":title", $title, PDO::PARAM_STR);
+        $stmt->bindParam(":description", $description, PDO::PARAM_STR);
+        $stmt->bindParam(":event_type", $event_type, PDO::PARAM_STR);
+        $stmt->bindParam(":university_id", $university_id, PDO::PARAM_INT);
+        $stmt->bindParam(":created_by", $created_by, PDO::PARAM_INT);
+        $stmt->bindParam(":start_date", $start_date, PDO::PARAM_STR);
+        $stmt->bindParam(":end_date", $end_date, PDO::PARAM_STR);
+        $stmt->bindParam(":timeline_description", $timeline_description, PDO::PARAM_STR);
+        $stmt->bindParam(":rules", $rules, PDO::PARAM_STR);
+        $stmt->bindParam(":rewards", $rewards, PDO::PARAM_STR);
+        $stmt->bindParam(":poster", $poster, PDO::PARAM_STR);
+        
         }
 
         $stmt->execute();
         echo "Event " . ($event_id ? "updated" : "created") . " successfully!";
+        header("Location: ../../../Hackentine/View/Club Coordinator/core.php");
     } catch (Exception $e) {
         die("Error: " . $e->getMessage());
     }
