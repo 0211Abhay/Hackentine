@@ -50,11 +50,13 @@ $result_members = $conn->query($sql_members);
             <div class="user-info">
             <img src="../../Modules/Assets/Images/Admin.jpg" alt="User Image" class="user-image">
             <?php
+            session_start();
                 if (isset($_SESSION['first_name']) && !empty($_SESSION['first_name'])) {
                     echo htmlspecialchars($_SESSION['first_name']); 
                 }
 
                 else {
+                    
                     echo "Guest";
                 }
             ?>
