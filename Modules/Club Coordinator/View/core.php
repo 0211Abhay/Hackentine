@@ -53,7 +53,7 @@ try {
 
 <body>
     <header>
-        <div class="logo"><img src="../../resources/img/10x Mini.png" alt="10X Club Logo"></div>
+        <div class="logo"><img src="../../../resources/img/10x Mini.png" alt="10X Club Logo"></div>
         <a href="../../Event Creation Page/event.php">
             <button class="create-event">Create an Event</button>
         </a>

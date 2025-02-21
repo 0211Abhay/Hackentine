@@ -43,21 +43,23 @@ try {
 <body>
     <div class="container">
         <div class="event-poster">
-
-
             <img src="../../Event Creation Page/uploads/<?php echo htmlspecialchars($event['poster']); ?>"
                  onerror="this.onerror=null; this.src='../../resources/event_posters/default.jpg';"
                  alt="Event Poster">
         </div>
+
         <div class="content">
             <div class="announcement">
                 <h3>Announcement</h3>
-                <p>&rarr; <?php echo htmlspecialchars($event['description']); ?></p>
+                <h2><?php echo htmlspecialchars($event['title']); ?></h2> <!-- Display Event Name -->
+
+                <p>&rarr; <b>Description</b>: <?php echo htmlspecialchars($event['description']); ?></p>
                 <p>&rarr; <b>Timelines</b>: <?php echo htmlspecialchars(date('d M Y', strtotime($event['start_date']))); ?> - <?php echo htmlspecialchars(date('d M Y', strtotime($event['end_date']))); ?></p>
-                <p>&rarr; <b>Eligibility</b>: Every Under Graduate student will eligible</p>
+                <p>&rarr; <b>Eligibility</b>: Every Undergraduate student is eligible.</p>
                 <p>&rarr; <b>Rules</b>: <?php echo htmlspecialchars($event['rules']); ?></p>
                 <p>&rarr; <b>Rewards</b>: <?php echo htmlspecialchars($event['rewards']); ?></p>
             </div>
+
             <div class="register-box">
                 <button>Register</button>
                 <p>Deadline: <?php echo htmlspecialchars(date('d M Y', strtotime($event['end_date']))); ?></p>
