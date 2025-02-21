@@ -1,5 +1,28 @@
 <?php
 session_start();
+
+
+
+// Redirect users away from login page if they are already logged in
+if (isset($_SESSION['id'])) {
+    switch ($_SESSION['role']) {
+        case 'mentor':
+            header('Location: ../../../../../../Hackentine/View/10X Mentor/mentor.php');
+            exit();
+        case 'coordinator':
+            header('Location: ../../../../../../../Hackentine/Modules/Club Coordinator/View/core.php');
+            exit();
+        case 'member':
+            header('Location: ../../../../../../../Hackentine/View/Student Dashboard/student.php');
+            exit();
+        default:
+            // Redirect to a default page if role is unknown
+            header('Location: ../../../../../../../Hackentine/View/default.php');
+            exit();
+    }
+}
+
+
 $error = [];
 
 // Include the database connection file
@@ -86,6 +109,19 @@ if (isset($_POST['submit'])) {
     <title>Login Form</title>
 </head>
 <body>
+<script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+    
+    // Prevent users from navigating back
+    window.onload = function () {
+        history.pushState(null, null, document.URL);
+        window.addEventListener('popstate', function () {
+            history.pushState(null, null, document.URL);
+        });
+    };
+</script>
     <div class="container">
         <div class="forms">
             <div class="form login">
@@ -128,5 +164,6 @@ if (isset($_POST['submit'])) {
         </div>
     </div>
     <script src="./script.js"></script>
+    
 </body>
 </html>
