@@ -1,6 +1,6 @@
 <?php
 // Database Connection
-$servername = "localhost:3307";
+$servername = "localhost:3306";
 $username = "root";
 $password = "";
 $database = "event_management";
