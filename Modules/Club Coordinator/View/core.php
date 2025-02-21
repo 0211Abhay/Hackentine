@@ -54,12 +54,12 @@ try {
 <body>
     <header>
         <div class="logo"><img src="../../resources/img/10x Mini.png" alt="10X Club Logo"></div>
-        <a href="../../Modules/Event Creation Page/event.php">
+        <a href="../../Event Creation Page/event.php">
             <button class="create-event">Create an Event</button>
         </a>
         <div class="user-info">
             <?php echo htmlspecialchars($_SESSION['first_name']); ?>
-            <button class="logout-btn" type="button" onclick="window.location.href='../../Modules/Authentication_&_Authorization/View/Logout/Logout.php'">Logout</button>
+            <button class="logout-btn" type="button" onclick="window.location.href='../../Authentication_&_Authorization/View/Logout/Logout.php'">Logout</button>
         </div>
     </header>
 
@@ -80,7 +80,7 @@ try {
     <div class="challenge-list">
     <?php if (!empty($upcomingEvents)): ?>
         <?php foreach ($upcomingEvents as $event): ?>
-            <a href="../../../Hackentine/Modules/Event Page/View/event.php?id=<?php echo $event['id']; ?>" class="challenge-link">
+            <a href="../../Event Page/View/event.php?id=<?php echo $event['id']; ?>" class="challenge-link">
                 <div class="challenge">
                     <div class="poster">
                         <img src="../../resources/event_posters/<?php echo htmlspecialchars($event['poster']); ?>"
@@ -106,7 +106,7 @@ try {
     <div class="challenge-list">
         <?php if (!empty($previousEvents)): ?>
             <?php foreach ($previousEvents as $event): ?>
-                <a href="../../../Hackentine/Modules/Event Page/View/event.php?id=<?php echo $event['id']; ?>" class="challenge-link">
+                <a href="../../Event Page/View/event.php?id=<?php echo $event['id']; ?>" class="challenge-link">
                     <div class="challenge">
                         <div class="poster">
                             <img src="../../resources/event_posters/<?php echo htmlspecialchars($event['poster']); ?>"
