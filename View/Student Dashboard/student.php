@@ -9,18 +9,37 @@ if (!isset($_SESSION['first_name']) || !isset($_SESSION['role']) || $_SESSION['r
 
 include "../../Modules/Includes/db_connect.php";
 
-// Fetch Approved Events from the Database
-$sql = "SELECT e.id, e.title, e.start_date, e.end_date, e.poster, 
-               u.name AS university_name 
-        FROM events e
-        LEFT JOIN universities u ON e.university_id = u.id
-        WHERE e.status = 'approved'
-        ORDER BY e.start_date DESC";
+$university_id = $_SESSION['university_id'] ?? null;
 
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-$events = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// Fetch Approved Past Events (Previous Challenges)
+$sql_previous = "SELECT e.id, e.title, e.start_date, e.end_date, e.poster, 
+                        u.name AS university_name 
+                 FROM events e
+                 LEFT JOIN universities u ON e.university_id = u.id
+                 WHERE e.status = 'approved' 
+                 AND (e.university_id = :university_id OR e.event_type = 'open for all')
+                 AND e.end_date < CURDATE()
+                 ORDER BY e.start_date DESC";
 
+$stmt_previous = $conn->prepare($sql_previous);
+$stmt_previous->bindParam(':university_id', $university_id, PDO::PARAM_INT);
+$stmt_previous->execute();
+$previous_events = $stmt_previous->fetchAll(PDO::FETCH_ASSOC);
+
+// Fetch Approved Future Events (Upcoming Events)
+$sql_upcoming = "SELECT e.id, e.title, e.start_date, e.end_date, e.poster, 
+                        u.name AS university_name 
+                 FROM events e
+                 LEFT JOIN universities u ON e.university_id = u.id
+                 WHERE e.status = 'approved' 
+                 AND (e.university_id = :university_id OR e.event_type = 'open for all')
+                 AND e.start_date >= CURDATE()
+                 ORDER BY e.start_date ASC";
+
+$stmt_upcoming = $conn->prepare($sql_upcoming);
+$stmt_upcoming->bindParam(':university_id', $university_id, PDO::PARAM_INT);
+$stmt_upcoming->execute();
+$upcoming_events = $stmt_upcoming->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -67,29 +86,56 @@ $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
         </div>
 
-        <!-- Previous Challenges Section -->
-        <section class="previous-challenges">
-            <h2>PREVIOUS CHALLENGES</h2>
-            <div class="challenges-container">
-                <?php if (!empty($events)) : ?>
-                    <?php foreach ($events as $event) : ?>
-                        <div class="challenge">
-                            <div class="poster">
-                                <img src="<?php echo htmlspecialchars($event['poster'] ?: '../../resources/img/default_poster.jpg'); ?>" alt="Event Poster">
-                            </div>
-                            <div class="details">
-                                <p><strong><?php echo htmlspecialchars($event['title']); ?></strong></p>
-                                <p><?php echo htmlspecialchars($event['start_date']) . " - " . htmlspecialchars($event['end_date']); ?></p>
-                                <p><em>University: <?php echo htmlspecialchars($event['university_name'] ?? 'Unknown'); ?></em></p>
-                                <a href="../../../Hackentine/Modules/Event Creation Page/event.php?id=<?php echo $event['id']; ?>" class="view-event-btn">View Event</a>
-                            </div>
+        <!-- Upcoming Events Section -->
+<section class="upcoming-events">
+    <h2>UPCOMING EVENTS</h2>
+    <div class="challenges-container">
+        <?php if (!empty($upcoming_events)) : ?>
+            <?php foreach ($upcoming_events as $event) : ?>
+                <a href="../../../Hackentine/Modules/Event Page/View/event.php?id=<?php echo $event['id']; ?>" class="event-link">
+                    <div class="challenge">
+                        <div class="poster">
+                            <img src="<?php echo htmlspecialchars($event['poster'] ?: '../../resources/img/default_poster.jpg'); ?>" alt="Event Poster">
                         </div>
-                    <?php endforeach; ?>
-                <?php else : ?>
-                    <p>No approved events found.</p>
-                <?php endif; ?>
-            </div>
-        </section>
+                        <div class="details">
+                            <p><strong><?php echo htmlspecialchars($event['title']); ?></strong></p>
+                            <p><?php echo htmlspecialchars($event['start_date']) . " - " . htmlspecialchars($event['end_date']); ?></p>
+                            <p><em>University: <?php echo htmlspecialchars($event['university_name'] ?? 'Unknown'); ?></em></p>
+                        </div>
+                    </div>
+                </a>
+            <?php endforeach; ?>
+        <?php else : ?>
+            <p>No upcoming events found.</p>
+        <?php endif; ?>
+    </div>
+</section>
+
+<!-- Previous Challenges Section -->
+<section class="previous-challenges">
+    <h2>PREVIOUS CHALLENGES</h2>
+    <div class="challenges-container">
+        <?php if (!empty($previous_events)) : ?>
+            <?php foreach ($previous_events as $event) : ?>
+                <a href="../../../Hackentine/Modules/Event Page/View/event.php?id=<?php echo $event['id']; ?>" class="event-link">
+                    <div class="challenge">
+                        <div class="poster">
+                            <img src="<?php echo htmlspecialchars($event['poster'] ?: '../../resources/img/default_poster.jpg'); ?>" alt="Event Poster">
+                        </div>
+                        <div class="details">
+                            <p><strong><?php echo htmlspecialchars($event['title']); ?></strong></p>
+                            <p><?php echo htmlspecialchars($event['start_date']) . " - " . htmlspecialchars($event['end_date']); ?></p>
+                            <p><em>University: <?php echo htmlspecialchars($event['university_name'] ?? 'Unknown'); ?></em></p>
+                        </div>
+                    </div>
+                </a>
+            <?php endforeach; ?>
+        <?php else : ?>
+            <p>No previous events found.</p>
+        <?php endif; ?>
+    </div>
+</section>
+
     </main>
 
     <script src="../../View/Student Dashboard/student.js"></script>
