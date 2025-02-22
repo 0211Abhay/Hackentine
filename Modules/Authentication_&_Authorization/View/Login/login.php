@@ -15,10 +15,6 @@ if (isset($_SESSION['id'])) {
         case 'member':
             header('Location: ../../../../../../../Hackentine/View/Student Dashboard/student.php');
             exit();
-        default:
-            // Redirect to a default page if role is unknown
-            header('Location: ../../../../../../../Hackentine/View/default.php');
-            exit();
     }
 }
 
