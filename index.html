@@ -50,11 +50,12 @@
         }
         
         .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            display: inline;
+        }
+        
+        .logo img {
+            max-width: 65px;
+            height: auto;
         }
         
         nav ul {
@@ -466,7 +467,7 @@
 <body>
     <header>
         <nav>
-            <div class="logo glow-text">10X Club</div>
+            <div class="logo"><img src="../Hackentine/resources/img/10x Mini.png" alt="10X Club Logo"></div>
             <button class="mobile-menu-btn">☰</button>
             <ul>
                 <li><a href="#home">Home</a></li>
