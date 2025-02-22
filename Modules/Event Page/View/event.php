@@ -96,7 +96,9 @@ if (isset($_GET['msg'])) {
                     <?php endif; ?>
                 <?php else: ?>
                     <a href="view_participants.php?event_id=<?php echo $event_id; ?>"><button>View Participants</button></a>
-                    <a href="generate_certificate.php?event_id=<?php echo $event_id; ?>"><button>Generate Certificate</button></a>
+                    <br>
+                    <br>
+                    <a href="./generate.php?event_id=<?php echo $event_id; ?>"><button>Generate Certificate</button></a>
                 <?php endif; ?>
                 
                 <p>Deadline: <?php echo htmlspecialchars(date('d M Y', strtotime($event['end_date']))); ?></p>
