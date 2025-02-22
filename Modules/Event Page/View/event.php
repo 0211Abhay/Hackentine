@@ -56,6 +56,35 @@ try {
 </head>
 
 <body>
+<header>
+    <div class="logo-container">
+        <img src="../../../resources/img/10x Mini.png" alt="10X Club Logo">
+        <button class="logout-btn" onclick="redirectToDashboard()">Back</button>
+    </div>
+    <div class="user-info">
+        <img src="../../../Modules/Assets/Images/Admin.jpg" alt="User Image" class="user-image">
+        <?php
+            echo htmlspecialchars($_SESSION['first_name'] ?? "Guest");
+
+            if (isset($_SESSION['university_id']) && !empty($_SESSION['university_id'])) {
+                $uni_id = $_SESSION['university_id'];
+                
+                // Fetch university name
+                $stmt = $conn->prepare("SELECT name FROM universities WHERE id = :uni_id");
+                $stmt->bindValue(':uni_id', $uni_id, PDO::PARAM_INT);
+                $stmt->execute();
+                $uni_name = $stmt->fetchColumn();
+                
+                echo "<p>" . htmlspecialchars($uni_name ?: "University Not Found") . "</p>";
+            } else {
+                echo "<p>No University Found</p>";
+            }
+        ?>
+        <button type="button" onclick="window.location.href='../../Modules/Authentication_&_Authorization/View/Logout/Logout.php'" class="logout-btn">Logout</button>
+    </div>
+</header>
+
+
     <div class="container">
         <div class="event-poster">
             <img src="../../Event Creation Page/uploads/<?php echo htmlspecialchars($event['poster']); ?>"
@@ -103,6 +132,27 @@ if (isset($_GET['msg'])) {
             </div>
         </div>
     </div>
+    <script>
+    function redirectToDashboard() {
+        <?php if (isset($_SESSION['id'])): ?>
+            switch ("<?php echo $_SESSION['role']; ?>") {
+                case 'mentor':
+                    window.location.href = '../../../../../../Hackentine/View/10X Mentor/mentor.php';
+                    break;
+                case 'coordinator':
+                    window.location.href = '../../../../../../../Hackentine/Modules/Club Coordinator/View/core.php';
+                    break;
+                case 'member':
+                    window.location.href = '../../../../../../../Hackentine/View/Student Dashboard/student.php';
+                    break;
+                default:
+                    window.location.href = '../../../../../../../Hackentine/View/default.php';
+            }
+        <?php else: ?>
+            window.location.href = '../../../../../../../Hackentine/View/default.php';
+        <?php endif; ?>
+    }
+    </script>
 </body>
 
 </html>
