@@ -61,7 +61,7 @@ if (isset($_GET['download']) && $_GET['download'] == 'excel') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Participants - <?php echo htmlspecialchars($event['title']); ?></title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../../../Modules/Event Page/View/view_participants.css">
 </head>
 <body>
     <div class="container">
