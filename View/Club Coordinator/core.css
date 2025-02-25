@@ -1,4 +1,5 @@
 /* General Styles */
+
 body {
     font-family: 'Inter', Arial, sans-serif;
     margin: 0;
@@ -8,7 +9,9 @@ body {
     min-height: 100vh;
 }
 
+
 /* Header */
+
 header {
     display: flex;
     justify-content: space-between;
@@ -24,7 +27,9 @@ header {
     height: auto;
 }
 
+
 /* Create Event Button */
+
 .create-event {
     width: 220px;
     padding: 15px 25px;
@@ -66,7 +71,9 @@ header {
     box-shadow: 0 4px 12px rgba(236, 73, 4, 0.3);
 }
 
+
 /* Mentor Section */
+
 .mentors {
     display: flex;
     justify-content: center;
@@ -82,9 +89,7 @@ header {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 1px solid rgba(236, 73, 4, 0.1);
-    text-align: center; 
-    justify-content: center;
-    align-items: center;
+    text-align: center;
 }
 
 .mentor-card:hover {
@@ -99,9 +104,9 @@ header {
     margin-bottom: 20px;
     border: 3px solid #EC4904;
     overflow: hidden;
-    text-align: center; 
+    text-align: center;
     justify-content: center;
-    align-items: center;   
+    align-items: center;
 }
 
 .mentor-img {
@@ -111,11 +116,13 @@ header {
     margin-bottom: 20px;
     border: 3px solid #EC4904;
     overflow: hidden;
-    text-align: center; 
-    justify-content: center;
+    display: flex;
     align-items: center;
-    
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
 }
+
 
 /* .mentor-img img {
     width: 100%;
@@ -130,7 +137,9 @@ header {
     margin-bottom: 8px;
 }
 
+
 /* Challenges Section */
+
 .challenges {
     padding: 40px;
     max-width: 1400px;
@@ -195,28 +204,29 @@ h2 {
     color: #EC4904;
 }
 
+
 /* Challenge Link Styles */
+
 .challenge-link {
     text-decoration: none;
     color: inherit;
 }
 
+
 /* Responsive Design */
+
 @media (max-width: 768px) {
     .challenge-list {
         grid-template-columns: 1fr;
     }
-    
     header {
         flex-direction: column;
         gap: 15px;
         padding: 15px;
     }
-    
     .challenge {
         flex-direction: column;
     }
-    
     .poster {
         width: 100%;
         height: 200px;

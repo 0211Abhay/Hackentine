@@ -18,6 +18,24 @@ require_once '../Event Creation Page/University.php';
 // Fetch all universities
 $universities = getAllUniversities();
 
+
+
+
+
+// Function to get university name by ID
+function getUniversityName($university_id, $conn) {
+    $query = "SELECT name FROM universities WHERE id = :id";
+    $stmt = $conn->prepare($query);
+    $stmt->bindValue(':id', $university_id, PDO::PARAM_INT); // Bind using PDO
+    $stmt->execute();
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $row ? htmlspecialchars($row['name']) : "Unknown University";
+}
+
+
+
+
+
 // For debugging
 error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
 ini_set('display_errors', 1);
@@ -39,7 +57,18 @@ ini_set('display_errors', 1);
         <div class="header">
             <div class="logo">
                 <img src="../../resources/img/10X Logo.jpg" alt="Logo">
-                <span>Uni Name</span>
+                <span><?php
+                $universityName = "";
+                if ($_SESSION["role"] == "coordinator" && isset($_SESSION["university_id"])) {
+                    $universityName = getUniversityName($_SESSION["university_id"], $conn);
+                }
+                if($_SESSION["role"] == "mentor"){
+                    echo "Welcome";
+                }
+                else if($_SESSION["role"] == "coordinator"){
+                    echo $universityName;
+                }
+                ?></span>
             </div>
             <span>
             <?php
@@ -79,20 +108,22 @@ ini_set('display_errors', 1);
                     <label><input type="radio" name="event_type" value="Hackathon"> Hackathon</label>
                     <label><input type="radio" name="event_type" value="Coding Challenge"> Coding Challenge</label>
                     <label><input type="radio" name="event_type" value="Other" id="otherType"> Other</label>
-                    <input type="text" id="customTypeInput" placeholder="Custom Type" style="display:none;">
+                    <input type="text" id="customTypeInput" placeholder="Enter custom event type" style="display: none;">
 
 
                     <?php if ($isMentor): ?>
                         <div class="event-access">
-    <label>Access Type</label>
-    <label>
-        <input type="radio" name="access_type" value="university-specific" checked onclick="toggleUniversityDropdown()"> 
-        University-Specific
-    </label>
-    <label>
-        <input type="radio" name="access_type" value="open-for-all" onclick="toggleUniversityDropdown()"> 
-        Open-for-All
-    </label>
+                    <label>Access Type</label>
+                    <br>
+                    <label>
+                        <input type="radio" name="access_type" value="university-specific" checked onclick="toggleUniversityDropdown()"> 
+                        University-Specific
+                    </label>
+                    <br>
+                    <label>
+                        <input type="radio" name="access_type" value="open-for-all" onclick="toggleUniversityDropdown()"> 
+                        Open-for-All
+                    </label>
 
     <!-- University Dropdown -->
     <div id="universityDropdown" style="display: block;">
@@ -125,6 +156,7 @@ ini_set('display_errors', 1);
         </form>
     </div>
 
+    <script src="event.js"></script>
 </body>
 
 </html>

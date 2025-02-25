@@ -1,4 +1,8 @@
 <?php
+header("Access-Control-Allow-Origin: *"); // This allows all origins
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
+
     $language = strtolower($_POST['language']);
     $code = $_POST['code'];
 
@@ -21,7 +25,7 @@
     }
 
     if ($language == "py") {
-        $output = shell_exec("C:\Users\Aaryan\AppData\Local\Programs\Python\Python310\python.exe $filePath 2>&1");
+        $output = shell_exec("C:\Python313\python.exe $filePath 2>&1");
     }
 
     if ($language == "javascript") {

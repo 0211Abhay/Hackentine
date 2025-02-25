@@ -40,24 +40,24 @@ $conn->close();
 </head>
 
 <body>
-    <header>
-        <div class="logo"><img src="../../resources/img/10x Mini.png" alt="10X Club Logo"></div>
-        <a href="../../../Hackentine/Modules/Event Creation Page/event.php">
-            <button class="create-event">Create an Event</button>
-        </a>
-        <?php
+    
+        <header>
+            <div class="logo"><img src="../../resources/img/10x Mini.png" alt="10X Club Logo"></div>
+            <div class="user-info">
+                <img src="../../../Hackentine/Modules/Assets/Images/Admin.jpg" alt="User Image" class="user-image">
+                <?php
+                session_start();
+                    if (isset($_SESSION['first_name']) && !empty($_SESSION['first_name'])) {
+                        echo htmlspecialchars($_SESSION['first_name']); 
+                    }
 
-            session_start();
-            if (isset($_SESSION['first_name']) && !empty($_SESSION['first_name'])) {
-                echo htmlspecialchars($_SESSION['first_name']); 
-            }
-
-            else {
-                echo "Guest";
-            }
-        
-        ?>
-    </header>
+                    else {
+                        echo "Guest";
+                    }
+                ?>
+                <button type="button" onclick="window.location.href='../../../Hackentine/Modules/Authentication_&_Authorization/View/Logout/Logout.php'" class="logout-btn">Logout</button>
+            </div>
+        </header>
 
     <div class="container">
         <!-- Event List -->
