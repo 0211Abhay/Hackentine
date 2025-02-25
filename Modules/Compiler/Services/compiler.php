@@ -30,7 +30,7 @@
     }
 
     if ($language == "c") {
-        $outputExe = "temp/" . $random . ".exe";
+        $outputExe = "../Submissions" . $random . ".exe";
         $compileOutput = shell_exec("gcc $filePath -o $outputExe 2>&1");
         if (!$compileOutput) {
             $output = shell_exec(__DIR__ . "/$outputExe 2>&1");
@@ -40,7 +40,7 @@
     }
 
     if ($language == "cpp") {
-        $outputExe = "temp/" . $random . ".exe";
+        $outputExe = "../Submissions/" . $random . ".exe";
         $compileOutput = shell_exec("g++ $filePath -o $outputExe 2>&1");
         if (!$compileOutput) {
             $output = shell_exec(__DIR__ . "/$outputExe 2>&1");
